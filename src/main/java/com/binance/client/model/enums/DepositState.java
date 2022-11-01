@@ -4,14 +4,29 @@ import com.binance.client.impl.utils.EnumLookup;
 
 
 /**
- * withdraw, deposit.
+ * 存款状态
+ * withdraw, deposit. 取款，存款。
  */
 public enum DepositState {
-
+  /**
+   * 未知
+   */
   UNKNOWN("unknown"),
+  /**
+   * 确认中
+   */
   CONFIRMING("confirming"),
+  /**
+   * 安全的
+   */
   SAFE("safe"),
+  /**
+   * 已确认
+   */
   CONFIRMED("confirmed"),
+  /**
+   * 孤儿
+   */
   ORPHAN("orphan");
 
 

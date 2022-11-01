@@ -5,20 +5,35 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * 综合交易
+ */
 public class AggregateTrade {
 
     private Long id;
-
+    /**
+     * 价格
+     */
     private BigDecimal price;
-
+    /**
+     * 数量
+     */
     private BigDecimal qty;
-
+    /**
+     * 第一个id
+     */
     private Long firstId;
-
+    /**
+     * 最后一个id
+     */
     private Long lastId;
-
+    /**
+     * 时间
+     */
     private Long time;
-
+    /**
+     * 是买家制造商
+     */
     private Boolean isBuyerMaker;
 
     public Long getId() {

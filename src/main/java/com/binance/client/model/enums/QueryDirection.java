@@ -2,8 +2,17 @@ package com.binance.client.model.enums;
 
 import com.binance.client.impl.utils.EnumLookup;
 
+/**
+ * 查询方向
+ */
 public enum QueryDirection {
+  /**
+   * 上一个
+   */
   PREV("prev"),
+  /**
+   * 下一个
+   */
   NEXT("next");
 
   private final String code;

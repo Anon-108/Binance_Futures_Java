@@ -2,11 +2,26 @@ package com.binance.client.model.market;
 
 import java.math.BigDecimal;
 
+/**
+ * 未平仓合约统计
+ */
 public class OpenInterestStat {
-    
+
+    /**
+     * 交易对
+     */
     private String symbol;
+    /**
+     * 持仓总数量
+     */
     private BigDecimal sumOpenInterest;
+    /**
+     *  持仓总价值
+     */
     private BigDecimal sumOpenInterestValue;
+    /**
+     * 时间戳
+     */
     private Long timestamp;
 
     public String getSymbol() {

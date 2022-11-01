@@ -5,34 +5,74 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * 我的交易
+ */
 public class MyTrade {
 
+    /**
+     * 是买家
+     */
     private Boolean isBuyer;
 
+    /**
+     * 手续费
+     */
     private BigDecimal commission;
 
+    /**
+     * 手续费计价单位
+     */
     private String commissionAsset;
-
+    /**
+     * 对方 ID
+     */
     private Long counterPartyId;
-
+    /**
+     * 是制造者
+     */
     private Boolean isMaker;
-
+    /**
+     * 订单id
+     */
     private Long orderId;
-
+    /**
+     * 价格
+     */
     private BigDecimal price;
 
+    /**
+     * 成交量
+     */
     private BigDecimal qty;
 
+    /**
+     * 成交额
+     */
     private BigDecimal quoteQty;
 
+    /**
+     * 实现盈亏
+     */
     private BigDecimal realizedPnl;
 
+    /**
+     * 买卖方向
+     */
     private String side;
 
+    /**
+     * 持仓方向，单向持仓模式下非必填，默认且仅可填BOTH;在双向持仓模式下必填,且仅可选择 LONG 或 SHORT
+     */
     private String positionSide;
 
+    /**
+     * 交易对
+     */
     private String symbol;
-
+    /**
+     * 时间
+     */
     private Long time;
 
     public Boolean getIsBuyer() {

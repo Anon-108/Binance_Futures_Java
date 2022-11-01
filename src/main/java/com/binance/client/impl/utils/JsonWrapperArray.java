@@ -8,10 +8,17 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.LinkedList;
 
+/**
+ * Json数组包装
+ */
 public class JsonWrapperArray {
 
     private JSONArray array = null;
 
+    /**
+     * Json数组包装
+     * @param array
+     */
     public JsonWrapperArray(JSONArray array) {
         this.array = array;
     }
@@ -48,6 +55,11 @@ public class JsonWrapperArray {
         }
     }
 
+    /**
+     * 获取对象
+     * @param index
+     * @return
+     */
     private Object getObjectAt(int index) {
         if (array != null && array.size() > index) {
             return array.get(index);

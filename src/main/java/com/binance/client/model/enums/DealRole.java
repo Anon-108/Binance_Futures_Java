@@ -1,12 +1,18 @@
 package com.binance.client.model.enums;
 
+/**
+ * 交易角色
+ */
 public enum DealRole {
 
   /**
-   * TAKER,MAKER
+   * TAKER
+   * 接受者
    */
-
   TAKER("taker"),
+  /**
+   * ,MAKER 制造者
+   */
   MAKER("maker")
   ;
 

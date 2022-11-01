@@ -5,12 +5,23 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * 账户余额
+ */
 public class AccountBalance {
 
+    /**
+     * 资产
+     */
     private String asset;
 
+    /**
+     * 总余额
+     */
     private BigDecimal balance;
-
+    /**
+     * 可以提取的
+     */
     private BigDecimal withdrawAvailable;
 
     public String getAsset() {

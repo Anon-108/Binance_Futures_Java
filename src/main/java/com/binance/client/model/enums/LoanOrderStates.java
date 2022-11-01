@@ -3,13 +3,26 @@ package com.binance.client.model.enums;
 import com.binance.client.impl.utils.EnumLookup;
 
 /**
+ * 贷款订单状态
  * created, accrual, cleared, invalid.
+ * 已创建、累计、清除、无效。
  */
 public enum LoanOrderStates {
-
+  /**
+   * 已创建
+   */
   CREATED("created"),
+  /**
+   * 累计
+   */
   ACCRUAL("accrual"),
+  /**
+   * 清除
+   */
   CLEARED("cleared"),
+  /**
+   * 无效
+   */
   INVALID("invalid");
 
   private final String code;

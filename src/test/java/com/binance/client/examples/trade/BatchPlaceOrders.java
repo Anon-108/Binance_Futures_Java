@@ -5,6 +5,7 @@ import com.binance.client.SyncRequestClient;
 import com.binance.client.examples.constants.PrivateConfig;
 
 /**
+ * 批量下单
  * @author : wangwanlu
  * @since : 2020/3/26, Thu
  **/

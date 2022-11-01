@@ -5,6 +5,9 @@ import com.binance.client.SyncRequestClient;
 
 import com.binance.client.examples.constants.PrivateConfig;
 
+/**
+ * 改变初始杠杆
+ */
 public class ChangeInitialLeverage {
     public static void main(String[] args) {
         RequestOptions options = new RequestOptions();

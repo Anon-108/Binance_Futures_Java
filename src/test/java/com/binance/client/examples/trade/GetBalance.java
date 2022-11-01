@@ -5,6 +5,9 @@ import com.binance.client.SyncRequestClient;
 
 import com.binance.client.examples.constants.PrivateConfig;
 
+/**
+ * 测试获取账户余额
+ */
 public class GetBalance {
     public static void main(String[] args) {
         RequestOptions options = new RequestOptions();

@@ -5,6 +5,7 @@ import com.binance.client.SyncRequestClient;
 import com.binance.client.examples.constants.PrivateConfig;
 
 /**
+ * 更改保证金类型（隔离，交叉
  * @author : wangwanlu
  * @since : 2020/4/23, Thu
  **/

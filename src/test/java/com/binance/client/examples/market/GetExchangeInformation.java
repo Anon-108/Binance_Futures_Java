@@ -5,6 +5,9 @@ import com.binance.client.SyncRequestClient;
 
 import com.binance.client.examples.constants.PrivateConfig;
 
+/**
+ * 得到交换信息
+ */
 public class GetExchangeInformation {
     public static void main(String[] args) {
         RequestOptions options = new RequestOptions();

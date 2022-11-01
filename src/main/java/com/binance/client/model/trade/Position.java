@@ -5,28 +5,63 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * 位置 /定位
+ */
 public class Position {
 
+    /**
+     * 是否是逐仓模式
+     */
     private Boolean isolated;
 
+    /**
+     *  杠杆倍数
+     */
     private BigDecimal leverage;
 
+    /**
+     * 当前所需起始保证金
+     */
     private BigDecimal initialMargin;
 
+    /**
+     * 维持保证金
+     */
     private BigDecimal maintMargin;
 
+    /**
+     *  当前挂单所需起始保证金(基于最新标记价格)
+     */
     private BigDecimal openOrderInitialMargin;
 
+    /**
+     * 持仓所需起始保证金(基于最新标记价格)
+     */
     private BigDecimal positionInitialMargin;
-
+    /**
+     * 交易对
+     */
     private String symbol;
 
+    /**
+     * 未实现盈亏
+     */
     private BigDecimal unrealizedProfit;
 
+    /**
+     * 开仓均价
+     */
     private String entryPrice;
 
+    /**
+     * 当前杠杆下用户可用的最大名义价值
+     */
     private String maxNotional;
 
+    /**
+     * 持仓方向，单向持仓模式下非必填，默认且仅可填BOTH;在双向持仓模式下必填,且仅可选择 LONG 或 SHORT
+     */
     private String positionSide;
 
     public Boolean getIsolated() {

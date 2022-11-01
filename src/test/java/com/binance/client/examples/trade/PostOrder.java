@@ -6,6 +6,9 @@ import com.binance.client.SyncRequestClient;
 import com.binance.client.examples.constants.PrivateConfig;
 import com.binance.client.model.enums.*;
 
+/**
+ * 测试发送新订单
+ */
 public class PostOrder {
     public static void main(String[] args) {
         RequestOptions options = new RequestOptions();

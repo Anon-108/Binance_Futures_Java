@@ -5,6 +5,9 @@ import com.binance.client.SyncRequestClient;
 
 import com.binance.client.examples.constants.PrivateConfig;
 
+/**
+ * 测试标记价格
+ */
 public class GetMarkPrice {
     public static void main(String[] args) {
         RequestOptions options = new RequestOptions();

@@ -6,6 +6,7 @@ import com.binance.client.examples.constants.PrivateConfig;
 import com.binance.client.model.enums.PositionSide;
 
 /**
+ * 添加逐仓保证金
  * @author : wangwanlu
  * @since : 2020/4/23, Thu
  **/

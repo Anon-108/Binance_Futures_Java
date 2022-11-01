@@ -5,6 +5,9 @@ import com.binance.client.SyncRequestClient;
 
 import com.binance.client.examples.constants.PrivateConfig;
 
+/**
+ * 得到清算订单
+ */
 public class GetLiquidationOrders {
     public static void main(String[] args) {
         RequestOptions options = new RequestOptions();

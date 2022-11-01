@@ -5,12 +5,23 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * 杠杆
+ */
 public class Leverage {
 
+    /**
+     * 杠杆倍数
+     */
     private BigDecimal leverage;
 
+    /**
+     * 当前杠杆倍数下允许的最大名义价值
+     */
     private Double maxNotionalValue;
-
+    /**
+     * 交易
+     */
     private String symbol;
 
     public BigDecimal getLeverage() {

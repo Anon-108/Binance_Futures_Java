@@ -5,6 +5,9 @@ import com.binance.client.SyncRequestClient;
 
 import com.binance.client.examples.constants.PrivateConfig;
 
+/**
+ * 测试交易对订单薄代码
+ */
 public class GetSymbolOrderBookTicker {
     public static void main(String[] args) {
         RequestOptions options = new RequestOptions();

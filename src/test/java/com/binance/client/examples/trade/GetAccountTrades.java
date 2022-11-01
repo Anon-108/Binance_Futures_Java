@@ -5,6 +5,9 @@ import com.binance.client.SyncRequestClient;
 
 import com.binance.client.examples.constants.PrivateConfig;
 
+/**
+ * 测试获取特定账户和交易品种的交易
+ */
 public class GetAccountTrades {
     public static void main(String[] args) {
         RequestOptions options = new RequestOptions();

@@ -5,28 +5,66 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * 市场风险
+ */
 public class PositionRisk {
 
+    /**
+     * 开仓均价
+     */
     private BigDecimal entryPrice;
 
+    /**
+     * 杠杆倍率
+     */
     private BigDecimal leverage;
 
+    /**
+     * 当前杠杆倍数允许的名义价值上限
+     */
     private Double maxNotionalValue;
 
+    /**
+     * 参考强平价格
+     */
     private BigDecimal liquidationPrice;
 
+    /**
+     * 标记价格
+     */
     private BigDecimal markPrice;
 
+    /**
+     * 持仓数量
+     */
     private BigDecimal positionAmt;
-
+    /**
+     * 交易对
+     */
     private String symbol;
 
+    /**
+     *  逐仓保证金
+     */
     private String isolatedMargin;
 
+    /**
+     * 持仓方向
+     */
     private String positionSide;
 
+    /**
+     * marginType:
+     *  YES	保证金模式
+ *      ISOLATED(逐仓),
+ *      CROSSED(全仓)
+     */
     private String marginType;
 
+    /**
+     * 持仓未实现盈亏
+     */
     private BigDecimal unrealizedProfit;
 
     public BigDecimal getEntryPrice() {

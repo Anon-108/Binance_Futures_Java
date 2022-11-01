@@ -3,12 +3,22 @@ package com.binance.client.model.market;
 import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+/**
+ * 交换过滤器
+ */
 public class ExchangeFilter {
-
+    /**
+     * 过滤类型
+     */
     private String filterType;
-
+    /**
+     * 最大订单数/大数量订单
+     */
     private Long maxNumOrders;
 
+    /**
+     * 最大算法订单数
+     */
     private Long maxNumAlgoOrders;
 
     public String getFilterType() {

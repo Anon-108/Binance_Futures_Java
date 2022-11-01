@@ -1,6 +1,8 @@
 package com.binance.client.model.enums;
 
-
+/**
+ * 保证金转账类型
+ */
 public enum MarginTransferType {
     IN("1"),
     OUT("2");

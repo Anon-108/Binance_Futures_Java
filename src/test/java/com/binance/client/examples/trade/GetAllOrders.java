@@ -5,6 +5,9 @@ import com.binance.client.SyncRequestClient;
 
 import com.binance.client.examples.constants.PrivateConfig;
 
+/**
+ * 测试获取所有账户订单；
+ */
 public class GetAllOrders {
     public static void main(String[] args) {
         RequestOptions options = new RequestOptions();

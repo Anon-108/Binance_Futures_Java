@@ -5,58 +5,129 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * 订单更新
+ */
 public class OrderUpdate {
-
+    /**
+     * 交易对
+     */
     private String symbol;
 
+    /**
+     *  用户自定义的订单号
+     */
     private String clientOrderId;
 
+    /**
+     * 买卖方向
+     */
     private String side;
-
+    /**
+     * 类型
+     */
     private String type;
 
+    /**
+     *  "timeInForce": "GTC",// 有效方法
+     */
     private String timeInForce;
 
+    /**
+     * 原始委托数量
+     */
     private BigDecimal origQty;
-
+    /**
+     * 价格
+     */
     private BigDecimal price;
 
+    /**
+     * 平均成交价
+     */
     private BigDecimal avgPrice;
 
+    /**
+     * 触发价，对`TRAILING_STOP_MARKET`无效
+     */
     private BigDecimal stopPrice;
 
+    /**
+     * 执行类型
+     */
     private String executionType;
 
+    /**
+     * 订单状态
+     */
     private String orderStatus;
-
+    /**
+     * 订单id
+     */
     private Long orderId;
-
+    /**
+     * 最后填充数量
+     */
     private BigDecimal lastFilledQty;
 
+    /**
+     * 累计填充数量
+     */
     private BigDecimal cumulativeFilledQty;
-
+    /**
+     * 最后填充价格
+     */
     private BigDecimal lastFilledPrice;
 
+    /**
+     * 手续费计价单位/佣金资产
+     */
     private String commissionAsset;
-
+    /**
+     * 佣金数量
+     */
     private BigDecimal commissionAmount;
 
+    /**
+     * 订单交易时间
+     */
     private Long orderTradeTime;
-
+    /**
+     * 交易id
+     */
     private Long tradeID;
 
+    /**
+     * 买单 名义上的
+     */
     private BigDecimal bidsNotional;
-
+    /**
+     *  卖单 名义价值
+     */
     private BigDecimal asksNotional;
 
+    /**
+     * 是标记面
+     */
     private Boolean isMarkerSide;
-
+    /**
+     *只是减少
+     */
     private Boolean isReduceOnly;
 
+    /**
+     * 条件价格触发类型
+     */
     private String workingType;
 
+    /**
+     * 追踪止损激活价格，仅TRAILING_STOP_MARKET 需要此参数, 默认为下单当前市场价格(支持不同workingType)
+     */
     private BigDecimal activationPrice;
 
+    /**
+     * 追踪止损回调比例，可取值范围[0.1, 4],其中 1代表1% ,仅TRAILING_STOP_MARKET 需要此参数
+     */
     private BigDecimal callbackRate;
 
     public String getSymbol() {

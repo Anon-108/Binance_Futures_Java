@@ -5,16 +5,31 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * 标记价格
+ */
 public class MarkPrice {
-
+    /**
+     * 交易对
+     */
     private String symbol;
-
+    /**
+     * 标记价格
+     */
     private BigDecimal markPrice;
 
+    /**
+     * 最近更新的资金费率
+     */
     private BigDecimal lastFundingRate;
 
+    /**
+     * 下次资金费时间
+     */
     private Long nextFundingTime;
-
+    /**
+     * 时间
+     */
     private Long time;
 
     public String getSymbol() {

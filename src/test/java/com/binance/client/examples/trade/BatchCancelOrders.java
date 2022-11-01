@@ -7,6 +7,7 @@ import com.binance.client.examples.constants.PrivateConfig;
 
 
 /**
+ * 批量取消订单
  * @author : wangwanlu
  * @since : 2020/4/7, Tue
  **/

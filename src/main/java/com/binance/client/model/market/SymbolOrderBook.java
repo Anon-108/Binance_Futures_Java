@@ -5,16 +5,33 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * 交易对订单薄
+ */
 public class SymbolOrderBook {
-
+    /**
+     * 交易对
+     */
     private String symbol;
 
+    /**
+     * 最优买单价
+     */
     private BigDecimal bidPrice;
 
+    /**
+     * 挂单量
+     */
     private BigDecimal bidQty;
 
+    /**
+     * 最优卖单价
+     */
     private BigDecimal askPrice;
 
+    /**
+     * 挂单量
+     */
     private BigDecimal askQty;
 
     public String getSymbol() {

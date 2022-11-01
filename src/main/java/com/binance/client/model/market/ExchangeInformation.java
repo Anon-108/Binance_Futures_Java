@@ -5,16 +5,30 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
+/**
+ * 交换信息
+ */
 public class ExchangeInformation {
-
+    /**
+     * 服务器所用的时间区域
+     */
     private String timezone;
-
+    /**
+     * 如果需要获取当前系统时间，请查询接口 “GET /fapi/v1/time”
+     */
     private Long serverTime;
-
+    /**
+     * API访问的限制
+     */
     private List<RateLimit> rateLimits;
-
+    /**
+     * 交换过滤
+     */
     private List<ExchangeFilter> exchangeFilters;
 
+    /**
+     * 交易对信息
+     */
     private List<ExchangeInfoEntry> symbols;
 
     public String getTimezone() {

@@ -5,6 +5,9 @@ import com.binance.client.SyncRequestClient;
 
 import com.binance.client.examples.constants.PrivateConfig;
 
+/**
+ * 获得资金利率
+ */
 public class GetFundingRate {
     public static void main(String[] args) {
         RequestOptions options = new RequestOptions();

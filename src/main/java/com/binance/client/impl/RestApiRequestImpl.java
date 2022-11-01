@@ -19,27 +19,56 @@ import com.binance.client.model.enums.*;
 import okhttp3.Request;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * Rest Api请求实现
+ */
 class RestApiRequestImpl {
 
     private String apiKey;
     private String secretKey;
     private String serverUrl;
 
+    /**
+     * Rest Api请求实现
+     * @param apiKey
+     * @param secretKey
+     * @param options
+     */
     RestApiRequestImpl(String apiKey, String secretKey, RequestOptions options) {
         this.apiKey = apiKey;
         this.secretKey = secretKey;
         this.serverUrl = options.getUrl();
     }
 
+    /**
+     * 通过Get创建请求
+     * @param address
+     * @param builder
+     * @return
+     */
     private Request createRequestByGet(String address, UrlParamsBuilder builder) {
         System.out.println(serverUrl);
         return createRequestByGet(serverUrl, address, builder);
     }
 
+    /**
+     * 通过Get创建请求
+     * @param url
+     * @param address
+     * @param builder
+     * @return
+     */
     private Request createRequestByGet(String url, String address, UrlParamsBuilder builder) {
         return createRequest(url, address, builder);
     }
 
+    /**
+     * 创建请求
+     * @param url
+     * @param address
+     * @param builder
+     * @return
+     */
     private Request createRequest(String url, String address, UrlParamsBuilder builder) {
         String requestUrl = url + address;
         System.out.print(requestUrl);
@@ -60,10 +89,17 @@ class RestApiRequestImpl {
         }
     }
 
+    /**
+     * 创建带签名的请求
+     * @param url
+     * @param address
+     * @param builder
+     * @return
+     */
     private Request createRequestWithSignature(String url, String address, UrlParamsBuilder builder) {
         if (builder == null) {
             throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
-                    "[Invoking] Builder is null when create request with Signature");
+                    "[Invoking] Builder is null when create request with Signature 当创建带有签名的请求时，[调用]生成器为空");
         }
         String requestUrl = url + address;
         new ApiSignature().createSignature(apiKey, secretKey, builder);
@@ -100,26 +136,57 @@ class RestApiRequestImpl {
         }
     }
 
+    /**
+     * 创建带签名的post请求
+     * @param address
+     * @param builder
+     * @return
+     */
     private Request createRequestByPostWithSignature(String address, UrlParamsBuilder builder) {
         return createRequestWithSignature(serverUrl, address, builder.setMethod("POST"));
     }
 
+    /**
+     * 创建带签名的get请求
+     * @param address
+     * @param builder
+     * @return
+     */
     private Request createRequestByGetWithSignature(String address, UrlParamsBuilder builder) {
         return createRequestWithSignature(serverUrl, address, builder);
     }
 
+    /**
+     *创建带签名的put请求
+     * @param address
+     * @param builder
+     * @return
+     */
     private Request createRequestByPutWithSignature(String address, UrlParamsBuilder builder) {
         return createRequestWithSignature(serverUrl, address, builder.setMethod("PUT"));
     }
 
+    /**
+     * 创建带签名的delete请求
+     * @param address
+     * @param builder
+     * @return
+     */
     private Request createRequestByDeleteWithSignature(String address, UrlParamsBuilder builder) {
         return createRequestWithSignature(serverUrl, address, builder.setMethod("DELETE"));
     }
 
+    /**
+     * 使用 APIkey 创建请求
+     * @param url
+     * @param address
+     * @param builder
+     * @return
+     */
     private Request createRequestWithApikey(String url, String address, UrlParamsBuilder builder) {
         if (builder == null) {
             throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
-                    "[Invoking] Builder is null when create request with Signature");
+                    "[Invoking] Builder is null when create request with Signature [Invoking] 创建带有签名的请求时，Builder 为空");
         }
         String requestUrl = url + address;
         requestUrl += builder.buildUrl();
@@ -153,10 +220,20 @@ class RestApiRequestImpl {
         }
     }
 
+    /**
+     * 通过 Get 使用 APIkey 创建请求
+     * @param address
+     * @param builder
+     * @return
+     */
     private Request createRequestByGetWithApikey(String address, UrlParamsBuilder builder) {
         return createRequestWithApikey(serverUrl, address, builder);
     }
 
+    /**
+     * 获取交易所信息
+     * @return
+     */
     RestApiRequest<ExchangeInformation> getExchangeInformation() {
         RestApiRequest<ExchangeInformation> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build();
@@ -221,6 +298,12 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取订单簿
+     * @param symbol
+     * @param limit
+     * @return
+     */
     RestApiRequest<OrderBook> getOrderBook(String symbol, Integer limit) {
         RestApiRequest<OrderBook> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -257,6 +340,12 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取最近的交易
+     * @param symbol
+     * @param limit
+     * @return
+     */
     RestApiRequest<List<Trade>> getRecentTrades(String symbol, Integer limit) {
         RestApiRequest<List<Trade>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -283,6 +372,13 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * getOldTrades
+     * @param symbol
+     * @param limit
+     * @param fromId
+     * @return
+     */
     RestApiRequest<List<Trade>> getOldTrades(String symbol, Integer limit, Long fromId) {
         RestApiRequest<List<Trade>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -310,6 +406,15 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取聚合交易
+     * @param symbol
+     * @param fromId
+     * @param startTime
+     * @param endTime
+     * @param limit
+     * @return
+     */
     RestApiRequest<List<AggregateTrade>> getAggregateTrades(String symbol, Long fromId,
                                                             Long startTime, Long endTime, Integer limit) {
         RestApiRequest<List<AggregateTrade>> request = new RestApiRequest<>();
@@ -341,6 +446,15 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     *
+     * @param symbol
+     * @param interval 间隔
+     * @param startTime
+     * @param endTime
+     * @param limit
+     * @return
+     */
     RestApiRequest<List<Candlestick>> getCandlestick(String symbol, CandlestickInterval interval, Long startTime,
                                                      Long endTime, Integer limit) {
         RestApiRequest<List<Candlestick>> request = new RestApiRequest<>();
@@ -377,6 +491,11 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取标记价格
+     * @param symbol
+     * @return
+     */
     RestApiRequest<List<MarkPrice>> getMarkPrice(String symbol) {
         RestApiRequest<List<MarkPrice>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -407,6 +526,14 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取资金费率
+     * @param symbol
+     * @param startTime
+     * @param endTime
+     * @param limit
+     * @return
+     */
     RestApiRequest<List<FundingRate>> getFundingRate(String symbol, Long startTime, Long endTime, Integer limit) {
         RestApiRequest<List<FundingRate>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -432,6 +559,11 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取 24 小时股票价格变化
+     * @param symbol
+     * @return
+     */
     RestApiRequest<List<PriceChangeTicker>> get24hrTickerPriceChange(String symbol) {
         RestApiRequest<List<PriceChangeTicker>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -472,6 +604,11 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取符号价格代码
+     * @param symbol
+     * @return
+     */
     RestApiRequest<List<SymbolPrice>> getSymbolPriceTicker(String symbol) {
         RestApiRequest<List<SymbolPrice>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -498,6 +635,11 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取符号订单薄代码/股票
+     * @param symbol
+     * @return
+     */
     RestApiRequest<List<SymbolOrderBook>> getSymbolOrderBookTicker(String symbol) {
         RestApiRequest<List<SymbolOrderBook>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -527,6 +669,14 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取清算/平仓订单
+     * @param symbol
+     * @param startTime
+     * @param endTime
+     * @param limit
+     * @return
+     */
     RestApiRequest<List<LiquidationOrder>> getLiquidationOrders(String symbol, Long startTime, Long endTime,
                                                                 Integer limit) {
         RestApiRequest<List<LiquidationOrder>> request = new RestApiRequest<>();
@@ -560,6 +710,11 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * post批量订单
+     * @param batchOrders
+     * @return
+     */
     RestApiRequest<List<Object>> postBatchOrders(String batchOrders) {
         RestApiRequest<List<Object>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -605,6 +760,22 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * post订单
+     * @param symbol
+     * @param side
+     * @param positionSide
+     * @param orderType
+     * @param timeInForce
+     * @param quantity
+     * @param price
+     * @param reduceOnly
+     * @param newClientOrderId
+     * @param stopPrice
+     * @param workingType
+     * @param newOrderRespType
+     * @return
+     */
     RestApiRequest<Order> postOrder(String symbol, OrderSide side, PositionSide positionSide, OrderType orderType,
             TimeInForce timeInForce, String quantity, String price, String reduceOnly,
             String newClientOrderId, String stopPrice, WorkingType workingType, NewOrderRespType newOrderRespType) {
@@ -648,6 +819,11 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 改变位置侧/面
+     * @param dual
+     * @return
+     */
     RestApiRequest<ResponseResult> changePositionSide(boolean dual) {
         RestApiRequest<ResponseResult> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -663,6 +839,12 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 更改保证金类型
+     * @param symbolName
+     * @param marginType 保证金类型
+     * @return
+     */
     RestApiRequest<ResponseResult> changeMarginType(String symbolName, String marginType) {
         RestApiRequest<ResponseResult> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -679,6 +861,14 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 添加持仓保证金
+     * @param symbolName
+     * @param type
+     * @param amount
+     * @param positionSide 持仓方向，单向持仓模式下非必填，默认且仅可填BOTH;在双向持仓模式下必填,且仅可选择 LONG 或 SHORT
+     * @return
+     */
     RestApiRequest<JSONObject> addPositionMargin(String symbolName, int type, String amount, PositionSide positionSide) {
         RestApiRequest<JSONObject> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -699,6 +889,15 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取持仓保证金历史记录
+     * @param symbolName
+     * @param type
+     * @param startTime
+     * @param endTime
+     * @param limit
+     * @return
+     */
     RestApiRequest<List<WalletDeltaLog>> getPositionMarginHistory(String symbolName, int type, long startTime, long endTime, int limit) {
         RestApiRequest<List<WalletDeltaLog>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -727,6 +926,10 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取持仓模式
+     * @return
+     */
     RestApiRequest<JSONObject> getPositionSide() {
         RestApiRequest<JSONObject> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build();
@@ -740,6 +943,13 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 取消订单
+     * @param symbol
+     * @param orderId
+     * @param origClientOrderId
+     * @return
+     */
     RestApiRequest<Order> cancelOrder(String symbol, Long orderId, String origClientOrderId) {
         RestApiRequest<Order> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -771,6 +981,11 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 取消所以打开订单
+     * @param symbol
+     * @return
+     */
     RestApiRequest<ResponseResult> cancelAllOpenOrder(String symbol) {
         RestApiRequest<ResponseResult> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -786,6 +1001,13 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 批量取消订单
+     * @param symbol
+     * @param orderIdList
+     * @param origClientOrderIdList
+     * @return
+     */
     RestApiRequest<List<Object>> batchCancelOrders(String symbol, String orderIdList, String origClientOrderIdList) {
         RestApiRequest<List<Object>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build();
@@ -836,6 +1058,13 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获得订单
+     * @param symbol
+     * @param orderId
+     * @param origClientOrderId
+     * @return
+     */
     RestApiRequest<Order> getOrder(String symbol, Long orderId, String origClientOrderId) {
         RestApiRequest<Order> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -867,6 +1096,11 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取打开订单
+     * @param symbol
+     * @return
+     */
     RestApiRequest<List<Order>> getOpenOrders(String symbol) {
         RestApiRequest<List<Order>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -901,6 +1135,15 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取所以订单
+     * @param symbol
+     * @param orderId
+     * @param startTime
+     * @param endTime
+     * @param limit
+     * @return
+     */
     RestApiRequest<List<Order>> getAllOrders(String symbol, Long orderId, Long startTime, Long endTime, Integer limit) {
         RestApiRequest<List<Order>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -939,6 +1182,10 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取余额
+     * @return
+     */
     RestApiRequest<List<AccountBalance>> getBalance() {
         RestApiRequest<List<AccountBalance>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build();
@@ -959,6 +1206,10 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取账户信息
+     * @return
+     */
     RestApiRequest<AccountInformation> getAccountInformation() {
         RestApiRequest<AccountInformation> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build();
@@ -1019,6 +1270,12 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 改变初始杠杆
+     * @param symbol
+     * @param leverage
+     * @return
+     */
     RestApiRequest<Leverage> changeInitialLeverage(String symbol, Integer leverage) {
         RestApiRequest<Leverage> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -1040,9 +1297,14 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取持仓风险
+     * @return
+     */
     RestApiRequest<List<PositionRisk>> getPositionRisk() {
         RestApiRequest<List<PositionRisk>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build();
+        //TODO  v2 较‘/fapi/v1/positionRisk’ 性能有较大改善
         request.request = createRequestByGetWithSignature("/fapi/v1/positionRisk", builder);
 
         request.jsonParser = (jsonWrapper -> {
@@ -1072,6 +1334,15 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取账户交易
+     * @param symbol
+     * @param startTime
+     * @param endTime
+     * @param fromId
+     * @param limit
+     * @return
+     */
     RestApiRequest<List<MyTrade>> getAccountTrades(String symbol, Long startTime, Long endTime, 
             Long fromId, Integer limit) {
         RestApiRequest<List<MyTrade>> request = new RestApiRequest<>();
@@ -1110,6 +1381,15 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取收入历史
+     * @param symbol
+     * @param incomeType
+     * @param startTime
+     * @param endTime
+     * @param limit
+     * @return
+     */
     RestApiRequest<List<Income>> getIncomeHistory(String symbol, IncomeType incomeType, Long startTime, Long endTime, 
             Integer limit) {
         RestApiRequest<List<Income>> request = new RestApiRequest<>();
@@ -1138,6 +1418,10 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 启动用户数据流
+     * @return
+     */
     RestApiRequest<String> startUserDataStream() {
         RestApiRequest<String> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build();
@@ -1151,6 +1435,11 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 保留用户数据流
+     * @param listenKey
+     * @return
+     */
     RestApiRequest<String> keepUserDataStream(String listenKey) {
         RestApiRequest<String> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -1165,6 +1454,11 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 关闭用户数据流
+     * @param listenKey
+     * @return
+     */
     RestApiRequest<String> closeUserDataStream(String listenKey) {
         RestApiRequest<String> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -1179,6 +1473,15 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取合约持仓量
+     * @param symbol
+     * @param period
+     * @param startTime
+     * @param endTime
+     * @param limit
+     * @return
+     */
     RestApiRequest<List<OpenInterestStat>> getOpenInterestStat(String symbol, PeriodType period, Long startTime, Long endTime, Integer limit) {
         RestApiRequest<List<OpenInterestStat>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -1209,6 +1512,15 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获得大户账户数多空比/获得顶级交易者账户比率
+     * @param symbol
+     * @param period
+     * @param startTime
+     * @param endTime
+     * @param limit
+     * @return
+     */
     RestApiRequest<List<CommonLongShortRatio>> getTopTraderAccountRatio(String symbol, PeriodType period, Long startTime, Long endTime, Integer limit) {
         RestApiRequest<List<CommonLongShortRatio>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -1240,6 +1552,15 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取大户持仓量多空比
+     * @param symbol
+     * @param period
+     * @param startTime
+     * @param endTime
+     * @param limit
+     * @return
+     */
     RestApiRequest<List<CommonLongShortRatio>> getTopTraderPositionRatio(String symbol, PeriodType period, Long startTime, Long endTime, Integer limit) {
         RestApiRequest<List<CommonLongShortRatio>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -1271,6 +1592,15 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取多空持仓人数比
+     * @param symbol
+     * @param period
+     * @param startTime
+     * @param endTime
+     * @param limit
+     * @return
+     */
     RestApiRequest<List<CommonLongShortRatio>> getGlobalAccountRatio(String symbol, PeriodType period, Long startTime, Long endTime, Integer limit) {
         RestApiRequest<List<CommonLongShortRatio>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
@@ -1302,6 +1632,15 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /**
+     * 获取合约主动买卖量
+     * @param symbol
+     * @param period
+     * @param startTime
+     * @param endTime
+     * @param limit
+     * @return
+     */
     RestApiRequest<List<TakerLongShortStat>> getTakerLongShortRatio(String symbol, PeriodType period, Long startTime, Long endTime, Integer limit) {
         RestApiRequest<List<TakerLongShortStat>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()

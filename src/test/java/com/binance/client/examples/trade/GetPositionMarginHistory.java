@@ -5,6 +5,7 @@ import com.binance.client.SyncRequestClient;
 import com.binance.client.examples.constants.PrivateConfig;
 
 /**
+ *  获取持仓保证金历史
  * @author : wangwanlu
  * @since : 2020/4/23, Thu
  **/

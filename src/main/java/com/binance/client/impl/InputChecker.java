@@ -6,20 +6,36 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 输入检查
+ */
 class InputChecker {
-
+  /**
+   * 正则表达式
+   */
   private static final String regEx = "[ _`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]|\n|\t";
-
+  /**
+   * 检查输入
+   */
   private static final InputChecker checkerInst;
 
   static {
     checkerInst = new InputChecker();
   }
 
+  /**
+   * 检查
+   * @return
+   */
   static InputChecker checker() {
     return checkerInst;
   }
 
+  /**
+   * 是特殊字符
+   * @param str
+   * @return
+   */
   private boolean isSpecialChar(String str) {
 
     Pattern p = Pattern.compile(regEx);
@@ -27,10 +43,17 @@ class InputChecker {
     return m.find();
   }
 
+  /**
+   * 不应该为空
+   * @param value
+   * @param name
+   * @param <T>
+   * @return
+   */
   <T> InputChecker shouldNotNull(T value, String name) {
     if (value == null) {
       throw new BinanceApiException(BinanceApiException.INPUT_ERROR,
-          "[Input] " + name + " should not be null");
+          "[Input] " + name + " should not be null 不应该为空");
     }
     return checkerInst;
   }
@@ -38,7 +61,7 @@ class InputChecker {
   <T> InputChecker shouldNull(T value, String name) {
     if (value != null) {
       throw new BinanceApiException(BinanceApiException.INPUT_ERROR,
-          "[Input] " + name + " should be null");
+          "[Input] " + name + " should be null 应该是null");
     }
     return checkerInst;
   }
@@ -46,11 +69,11 @@ class InputChecker {
   InputChecker checkSymbol(String symbol) {
     if (symbol == null || "".equals(symbol)) {
       throw new BinanceApiException(BinanceApiException.INPUT_ERROR,
-          "[Input] Symbol is mandatory");
+          "[Input] Symbol is mandatory [输入]符号为必填项");
     }
     if (isSpecialChar(symbol)) {
       throw new BinanceApiException(BinanceApiException.INPUT_ERROR,
-          "[Input] " + symbol + " is invalid symbol");
+          "[Input] " + symbol + " is invalid symbol 是无效的符号");
     }
     return checkerInst;
   }
@@ -75,6 +98,14 @@ class InputChecker {
     return checkerInst;
   }
 
+  /**
+   * 检查范围
+   * @param size
+   * @param min
+   * @param max
+   * @param name
+   * @return
+   */
   private InputChecker checkRange(int size, int min, int max, String name) {
     if (!(min <= size && size <= max)) {
       throw new BinanceApiException(BinanceApiException.INPUT_ERROR,

@@ -4,16 +4,34 @@ import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
+ * 钱包增量日志
  * @author : wangwanlu
  * @since : 2020/4/24, Fri
  **/
 public class WalletDeltaLog {
-
+    /**
+     * 交易对
+     */
     private String symbol;
+    /**
+     * 类型
+     */
     private int type;
+    /**
+     * 数量
+     */
     private String amount;
+    /**
+     * 资产
+     */
     private String asset;
+    /**
+     * 时间
+     */
     private Long time;
+    /**
+     * 持仓方向
+     */
     private String positionSide;
 
     public String getSymbol() {

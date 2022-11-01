@@ -5,6 +5,9 @@ import com.binance.client.SyncRequestClient;
 import com.binance.client.SubscriptionClient;
 import com.binance.client.examples.constants.PrivateConfig;
 
+/**
+ * 测试订阅用户数据
+ */
 public class SubscribeUserData {
 
     public static void main(String[] args) {

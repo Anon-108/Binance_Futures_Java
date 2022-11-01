@@ -5,10 +5,17 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
+/**
+ * 账户更新
+ */
 public class AccountUpdate {
-
+    /**
+     * 余额
+     */
     private List<BalanceUpdate> balances;
-
+    /**
+     * 持仓 /仓位
+     */
     private List<PositionUpdate> positions;
 
     public List<BalanceUpdate> getBalances() {

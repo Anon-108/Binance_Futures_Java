@@ -12,10 +12,18 @@ import java.util.Set;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
+/**
+ * Json 包装器
+ */
 public class JsonWrapper {
 
     private final JSONObject json;
 
+    /**
+     * 从字符串解析
+     * @param text
+     * @return
+     */
     public static JsonWrapper parseFromString(String text) {
         try {
             JSONObject jsonObject;
@@ -28,40 +36,64 @@ public class JsonWrapper {
                 return new JsonWrapper(jsonObject);
             } else {
                 throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
-                        "[Json] Unknown error when parse: " + text);
+                        "[Json] Unknown error when parse [Json] 解析时出现未知错误: " + text);
             }
         } catch (JSONException e) {
-            throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR, "[Json] Fail to parse json: " + text);
+            throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR, "[Json] Fail to parse json [Json] 解析 json 失败: " + text);
         } catch (Exception e) {
             throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR, "[Json] " + e.getMessage());
         }
     }
 
+    /**
+     * Json 包装器
+     * @param json
+     */
     public JsonWrapper(JSONObject json) {
         this.json = json;
     }
 
+    /**
+     * 检查必填字段
+     * @param name
+     */
     private void checkMandatoryField(String name) {
         if (!json.containsKey(name)) {
             throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
-                    "[Json] Get json item field: " + name + " does not exist");
+                    "[Json] Get json item field:[Json] 获取 json 项目字段： " + name + " does not exist 不存在");
         }
     }
 
+    /**
+     * 包含key
+     * @param name
+     * @return
+     */
     public boolean containKey(String name) {
         return json.containsKey(name);
     }
 
+    /**
+     * 获得字符串
+     * @param name
+     * @return
+     */
     public String getString(String name) {
         checkMandatoryField(name);
         try {
             return json.getString(name);
         } catch (Exception e) {
             throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
-                    "[Json] Get string error: " + name + " " + e.getMessage());
+                    "[Json] Get string error [Json] 获取字符串错误: " + name + " " + e.getMessage());
         }
     }
 
+    /**
+     * 获取字符串或默认值
+     * @param name 名称
+     * @param def 默认值
+     * @return
+     */
     public String getStringOrDefault(String name, String def) {
         if (!containKey(name)) {
             return def;
@@ -69,6 +101,12 @@ public class JsonWrapper {
         return getString(name);
     }
 
+    /**
+     * 获取布尔值或默认值
+     * @param name
+     * @param defaultValue 默认值
+     * @return
+     */
     public Boolean getBooleanOrDefault(String name, Boolean defaultValue) {
         if (!containKey(name)) {
             return defaultValue;
@@ -76,13 +114,18 @@ public class JsonWrapper {
         return getBoolean(name);
     }
 
+    /**
+     * 获取布尔值
+     * @param name
+     * @return
+     */
     public boolean getBoolean(String name) {
         checkMandatoryField(name);
         try {
             return json.getBoolean(name);
         } catch (Exception e) {
             throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
-                    "[Json] Get boolean error: " + name + " " + e.getMessage());
+                    "[Json] Get boolean error:获取布尔值错误 " + name + " " + e.getMessage());
         }
     }
 
@@ -92,7 +135,7 @@ public class JsonWrapper {
             return json.getInteger(name);
         } catch (Exception e) {
             throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
-                    "[Json] Get integer error: " + name + " " + e.getMessage());
+                    "[Json] Get integer error:[Json]获取整数错误 " + name + " " + e.getMessage());
         }
     }
 
@@ -104,7 +147,7 @@ public class JsonWrapper {
             return json.getInteger(name);
         } catch (Exception e) {
             throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
-                    "[Json] Get integer error: " + name + " " + e.getMessage());
+                    "[Json] Get integer error:[Json]获取整数错误 " + name + " " + e.getMessage());
         }
     }
 
@@ -114,7 +157,7 @@ public class JsonWrapper {
             return json.getLong(name);
         } catch (Exception e) {
             throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
-                    "[Json] Get long error: " + name + " " + e.getMessage());
+                    "[Json] Get long error: [Json] 得到Long错误：" + name + " " + e.getMessage());
         }
     }
 
@@ -126,7 +169,7 @@ public class JsonWrapper {
             return json.getLong(name);
         } catch (Exception e) {
             throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
-                    "[Json] Get long error: " + name + " " + e.getMessage());
+                    "[Json] Get long error:[Json] 得到long错误： " + name + " " + e.getMessage());
         }
     }
     public Double getDouble(String name) {
@@ -178,6 +221,10 @@ public class JsonWrapper {
         return new JsonWrapper(json.getJSONObject(name));
     }
 
+    /**
+     * 转换 2 Json 对象
+     * @return
+     */
     public JSONObject convert2JsonObject() {
         return this.json;
     }
@@ -206,6 +253,10 @@ public class JsonWrapper {
         return json;
     }
 
+    /**
+     * 转换 2 字典列表
+     * @return
+     */
     public List<Map<String, String>> convert2DictList() {
         List<Map<String, String>> result = new LinkedList<>();
         Set<String> keys = this.json.keySet();

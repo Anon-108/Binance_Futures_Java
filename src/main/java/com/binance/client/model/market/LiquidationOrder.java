@@ -5,24 +5,52 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * 平仓/清算订单
+ */
 public class LiquidationOrder {
-
+    /**
+     * 交易对
+     */
     private String symbol;
-
+    /**
+     * 价格
+     */
     private BigDecimal price;
-
+    /**
+     * 原始委托数量
+     */
     private BigDecimal origQty;
 
+    /**
+     * 成交量
+     */
     private BigDecimal executedQty;
 
+    /**
+     * 平均价格
+     */
     private BigDecimal averagePrice;
-
+    /**
+     *  // 有效方式
+     *                 "GTC", // 成交为止, 一直有效
+     *                 "IOC", // 无法立即成交(吃单)的部分就撤销
+     *                 "FOK", // 无法全部立即成交就撤销
+     *                 "GTX" // 无法成为挂单方就撤销
+     */
     private String timeInForce;
-
+    /**
+     * 订单类型
+     */
     private String type;
-
+    /**
+     * 买卖方向
+     */
     private String side;
 
+    /**
+     * 时间
+     */
     private Long time;
 
     public String getSymbol() {

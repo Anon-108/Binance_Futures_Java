@@ -2,12 +2,29 @@ package com.binance.client.model.market;
 
 import java.math.BigDecimal;
 
+/**
+ * 常见/普通的多空比率
+ */
 public class CommonLongShortRatio {
-    
+    /**
+     * 符号
+     */
     private String symbol;
+    /**
+     *多头账户
+     */
     private BigDecimal longAccount;
+    /**
+     * 多空比率
+     */
     private BigDecimal longShortRatio;
+    /**
+     * 空头账户
+     */
     private BigDecimal shortAccount;
+    /**
+     * 时间戳
+     */
     private Long timestamp;
 
     public String getSymbol() {

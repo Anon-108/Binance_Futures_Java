@@ -1,5 +1,8 @@
 package com.binance.client.model.enums;
 
+/**
+ * MBP 级别枚举
+ */
 public enum MBPLevelEnums {
 
 

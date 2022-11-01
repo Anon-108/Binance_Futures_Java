@@ -5,18 +5,34 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * 交易
+ */
 public class Trade {
 
     private Long id;
 
+    /**
+     * 价格
+     */
     private BigDecimal price;
-
+    /**
+     * 成交量
+     */
     private BigDecimal qty;
 
+    /**
+     * 成交额
+     */
     private BigDecimal quoteQty;
-
+    /**
+     * 时间
+     */
     private Long time;
 
+    /**
+     * 买方是否为挂单方
+     */
     private Boolean isBuyerMaker;
 
     public Long getId() {

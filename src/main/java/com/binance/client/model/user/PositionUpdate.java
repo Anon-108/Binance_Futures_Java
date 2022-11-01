@@ -4,16 +4,31 @@ import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.math.BigDecimal;
 
+/**
+ * 持仓更新
+ */
 public class PositionUpdate {
-
+    /**
+     * 交易对
+     */
     private String symbol;
 
+    /**
+     * 数量
+     */
     private BigDecimal amount;
 
+    /**
+     *  开仓均价
+     */
     private BigDecimal entryPrice;
-
+    /**
+     * 预审费?
+     */
     private BigDecimal preFee;
-
+    /**
+     * 未实现Pnl
+     */
     private BigDecimal unrealizedPnl;
 
     public String getSymbol() {

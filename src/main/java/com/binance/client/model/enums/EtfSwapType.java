@@ -2,8 +2,17 @@ package com.binance.client.model.enums;
 
 import com.binance.client.impl.utils.EnumLookup;
 
+/**
+ * eft swap 类型
+ */
 public enum  EtfSwapType {
+  /**
+   * etf swap 进
+   */
   ETF_SWAP_IN("1"),
+  /**
+   * etf swap 出
+   */
   ETF_SWAP_OUT("2");
 
   private final String code;

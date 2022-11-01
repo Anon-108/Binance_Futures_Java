@@ -5,6 +5,9 @@ import com.binance.client.SyncRequestClient;
 
 import com.binance.client.examples.constants.PrivateConfig;
 
+/**
+ * 测试旧交易
+ */
 public class GetOldTrades {
     public static void main(String[] args) {
         RequestOptions options = new RequestOptions();

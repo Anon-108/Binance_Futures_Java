@@ -3,14 +3,29 @@ package com.binance.client.model.market;
 import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+/**
+ * 限制流量
+ */
 public class RateLimit {
-
+    /**
+     * 限制种类 (rateLimitType)
+     * REQUESTS_WEIGHT 按照访问权重来计算
+     * ORDERS 按照订单数量来计算
+     */
     private String rateLimitType;
 
+    /**
+     * 	时间间隔
+     */
     private String interval;
-
+    /**
+     *  "intervalNum": 1, // 按照1分钟计算
+     */
     private Long intervalNum;
 
+    /**
+     *  "limit": 2400, // 上限次数
+     */
     private Long limit;
 
     public String getRateLimitType() {

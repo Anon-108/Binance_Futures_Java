@@ -9,20 +9,38 @@ import com.binance.client.model.trade.*;
 
 import java.util.List;
 
+/**
+ * 同步请求实现
+ */
 public class SyncRequestImpl implements SyncRequestClient {
-
+    /**
+     * rest api请求实现
+     */
     private final RestApiRequestImpl requestImpl;
 
+    /**
+     * 同步请求实现
+     * @param requestImpl
+     */
     SyncRequestImpl(RestApiRequestImpl requestImpl) {
         this.requestImpl = requestImpl;
     }
 
-    
+    /**
+     * 获取交易所信息
+     * @return
+     */
     @Override
     public ExchangeInformation getExchangeInformation() {
         return RestApiInvoker.callSync(requestImpl.getExchangeInformation());
     }
-    
+
+    /**
+     * 获取订单薄
+     * @param symbol
+     * @param limit
+     * @return
+     */
     @Override
     public OrderBook getOrderBook(String symbol, Integer limit) {
         return RestApiInvoker.callSync(requestImpl.getOrderBook(symbol, limit));

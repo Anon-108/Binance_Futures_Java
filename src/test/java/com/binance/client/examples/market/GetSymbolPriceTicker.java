@@ -5,6 +5,9 @@ import com.binance.client.SyncRequestClient;
 
 import com.binance.client.examples.constants.PrivateConfig;
 
+/**
+ * 测试交易对价格代码
+ */
 public class GetSymbolPriceTicker {
     public static void main(String[] args) {
         RequestOptions options = new RequestOptions();

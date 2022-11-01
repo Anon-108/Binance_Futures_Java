@@ -14,8 +14,13 @@ import java.util.LinkedHashMap;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
+/**
+ * url参数生成器
+ */
 public class UrlParamsBuilder {
-
+    /**
+     * 参数map
+     */
     class ParamsMap {
 
         final Map<String, String> map = new LinkedHashMap<>();
@@ -57,18 +62,35 @@ public class UrlParamsBuilder {
     private final ParamsMap postBodyMap = new ParamsMap();
     private String method = "GET";
 
+    /**
+     * url参数生成器
+     * @return
+     */
     public static UrlParamsBuilder build() {
         return new UrlParamsBuilder();
     }
 
+    /**
+     * url参数生成器
+     */
     private UrlParamsBuilder() {
     }
 
+    /**
+     * 设置方法
+     * @param mode
+     * @return
+     */
     public UrlParamsBuilder setMethod(String mode) {
         method = mode;
         return this;
     }
 
+    /**
+     * 检查方法
+     * @param mode
+     * @return
+     */
     public Boolean checkMethod(String mode) {
         return mode.equals(method);
     }
@@ -149,6 +171,10 @@ public class UrlParamsBuilder {
 
     }
 
+    /**
+     * 构建签名
+     * @return
+     */
     public String buildSignature() {
         Map<String, String> map = new LinkedHashMap<>(paramsMap.map);
         StringBuilder head = new StringBuilder();

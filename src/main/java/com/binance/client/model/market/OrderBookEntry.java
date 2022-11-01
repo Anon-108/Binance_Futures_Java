@@ -5,10 +5,17 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * 订单薄 入口 /条目
+ */
 public class OrderBookEntry {
-
+    /**
+     * 价格
+     */
     private BigDecimal price;
-
+    /**
+     * 数量
+     */
     private BigDecimal qty;
 
     public BigDecimal getPrice() {

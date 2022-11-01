@@ -5,7 +5,9 @@ import com.binance.client.exception.BinanceApiException;
 import java.net.URL;
 
 /**
+ * 请求选项
  * The configuration for the request APIs
+ * 请求 API 的配置
  */
 public class RequestOptions {
 
@@ -20,6 +22,7 @@ public class RequestOptions {
 
     /**
      * Set the URL for request.
+     * 设置请求的 URL。
      *
      * @param url The URL name like "https://fapi.binance.com".
      */

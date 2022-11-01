@@ -2,11 +2,26 @@ package com.binance.client.model.market;
 
 import java.math.BigDecimal;
 
+/**
+ *  接受者 多空统计
+ */
 public class TakerLongShortStat {
-    
+
+    /**
+     * 买 卖比率
+     */
     private BigDecimal buySellRatio;
+    /**
+     * 主动卖出量
+     */
     private BigDecimal sellVol;
+    /**
+     * 主动买入量
+     */
     private BigDecimal buyVol;
+    /**
+     * 时间
+     */
     private Long timestamp;
 
     public BigDecimal getBuySellRatio() {

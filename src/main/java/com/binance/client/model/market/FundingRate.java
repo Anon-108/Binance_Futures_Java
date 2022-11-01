@@ -5,12 +5,22 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * 资金费率
+ */
 public class FundingRate {
-
+    /**
+     * 交易对信息
+     */
     private String symbol;
-
+    /**
+     * 最近更新的资金费率
+     */
     private BigDecimal fundingRate;
 
+    /**
+     * 下次资金费时间
+     */
     private Long fundingTime;
 
     public String getSymbol() {

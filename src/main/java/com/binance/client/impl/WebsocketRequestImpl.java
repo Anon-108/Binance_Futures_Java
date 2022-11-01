@@ -26,11 +26,23 @@ import com.binance.client.model.user.OrderUpdate;
 import com.binance.client.model.user.PositionUpdate;
 import com.binance.client.model.user.UserDataUpdateEvent;
 
+/**
+ * websocket请求实现
+ */
 class WebsocketRequestImpl {
-
+    /**
+     * websocket请求
+     */
     WebsocketRequestImpl() {
     }
 
+    /**
+     * 订阅聚合交易事件
+     * @param symbol
+     * @param subscriptionListener
+     * @param errorHandler
+     * @return
+     */
     WebsocketRequest<AggregateTradeEvent> subscribeAggregateTradeEvent(String symbol,
             SubscriptionListener<AggregateTradeEvent> subscriptionListener,
             SubscriptionErrorHandler errorHandler) {
@@ -58,6 +70,13 @@ class WebsocketRequestImpl {
         return request;
     }
 
+    /**
+     * 订阅标记价格事件
+     * @param symbol
+     * @param subscriptionListener
+     * @param errorHandler
+     * @return
+     */
     WebsocketRequest<MarkPriceEvent> subscribeMarkPriceEvent(String symbol,
             SubscriptionListener<MarkPriceEvent> subscriptionListener,
             SubscriptionErrorHandler errorHandler) {
@@ -81,6 +100,14 @@ class WebsocketRequestImpl {
         return request;
     }
 
+    /**
+     * 订阅烛台事件
+     * @param symbol
+     * @param interval
+     * @param subscriptionListener
+     * @param errorHandler
+     * @return
+     */
     WebsocketRequest<CandlestickEvent> subscribeCandlestickEvent(String symbol, CandlestickInterval interval,
             SubscriptionListener<CandlestickEvent> subscriptionListener,
             SubscriptionErrorHandler errorHandler) {

@@ -5,6 +5,9 @@ import com.binance.client.SyncRequestClient;
 
 import com.binance.client.examples.constants.PrivateConfig;
 
+/**
+ * 取消订单
+ */
 public class CancelOrder {
     public static void main(String[] args) {
         RequestOptions options = new RequestOptions();

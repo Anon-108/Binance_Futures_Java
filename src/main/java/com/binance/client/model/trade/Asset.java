@@ -5,22 +5,48 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * 资产
+ */
 public class Asset {
-
+    /**
+     * 资产
+     */
     private String asset;
 
+    /**
+     * 当前所需起始保证金
+     */
     private BigDecimal initialMargin;
 
+    /**
+     * 维持保证金
+     */
     private BigDecimal maintMargin;
 
+    /**
+     * 保证金余额
+     */
     private BigDecimal marginBalance;
 
+    /**
+     * 最大可转出余额
+     */
     private BigDecimal maxWithdrawAmount;
 
+    /**
+     * 当前挂单所需起始保证金(基于最新标记价格)
+     */
     private BigDecimal openOrderInitialMargin;
 
+    /**
+     *  持仓所需起始保证金(基于最新标记价格)
+     */
     private BigDecimal positionInitialMargin;
 
+    /**
+     * 未实现盈亏
+     */
     private BigDecimal unrealizedProfit;
 
     public String getAsset() {

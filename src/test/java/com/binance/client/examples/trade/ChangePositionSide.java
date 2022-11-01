@@ -5,6 +5,7 @@ import com.binance.client.SyncRequestClient;
 import com.binance.client.examples.constants.PrivateConfig;
 
 /**
+ * 改变持仓方向
  * @author : wangwanlu
  * @since : 2020/3/25, Wed
  **/

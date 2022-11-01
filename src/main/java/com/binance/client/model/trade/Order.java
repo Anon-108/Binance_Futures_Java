@@ -5,39 +5,89 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * 订单
+ */
 public class Order {
 
+    /**
+     * 用户自定义的订单号
+     */
     private String clientOrderId;
 
+    /**
+     *  成交金额
+     */
     private BigDecimal cumQuote;
 
+    /**
+     * 成交量
+     */
     private BigDecimal executedQty;
 
+    /**
+     * 系统订单号
+     */
     private Long orderId;
 
+    /**
+     *  原始委托数量
+     */
     private BigDecimal origQty;
 
+    /**
+     * / 委托价格
+     */
     private BigDecimal price;
 
+    /**
+     * 是否仅减仓
+     */
     private Boolean reduceOnly;
-
+    /**
+     * "side": "BUY",/ 买卖方向
+     */
     private String side;
 
+    /**
+     * "positionSide": "SHORT", // 持仓方向
+     */
     private String positionSide;
 
+    /**
+     *  订单状态
+     */
     private String status;
 
+    /**
+     * 触发价，对`TRAILING_STOP_MARKET`无效
+     */
     private BigDecimal stopPrice;
-
+    /**
+     * 交易对
+     */
     private String symbol;
 
+    /**
+     * "timeInForce": "GTC", 有效方法
+     */
     private String timeInForce;
-
+    /**
+     * 订单类型
+     */
     private String type;
 
+    /**
+     * 更新时间
+     */
     private Long updateTime;
 
+    /**
+     * 条件价格触发类型
+     */
     private String workingType;
+
+
 
     public String getClientOrderId() {
         return clientOrderId;

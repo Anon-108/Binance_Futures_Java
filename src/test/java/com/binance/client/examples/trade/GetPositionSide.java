@@ -5,6 +5,7 @@ import com.binance.client.SyncRequestClient;
 import com.binance.client.examples.constants.PrivateConfig;
 
 /**
+ * 测试获取持仓模式
  * @author : wangwanlu
  * @since : 2020/4/7, Tue
  **/

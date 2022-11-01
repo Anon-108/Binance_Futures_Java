@@ -5,30 +5,60 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ *  烛台
+ */
 public class Candlestick {
-
+    /**
+     * 打开时间
+     */
     private Long openTime;
-
+    /**
+     * 开盘价
+     */
     private BigDecimal open;
-
+    /**
+     * 最高价
+     */
     private BigDecimal high;
-
+    /**
+     * 最低价
+     */
     private BigDecimal low;
-
+    /**
+     * 收盘价
+     */
     private BigDecimal close;
-
+    /**
+     * 量
+     */
     private BigDecimal volume;
-
+    /**
+     * 收盘时间
+     */
     private Long closeTime;
 
+    /**
+     * 报价资产量
+     */
     private BigDecimal quoteAssetVolume;
-
+    /**
+     * 交易数量
+     */
     private Integer numTrades;
 
+    /**
+     * 接受者 购买基础资产量
+     */
     private BigDecimal takerBuyBaseAssetVolume;
 
+    /**
+     * 接收者 买入报价资产量
+     */
     private BigDecimal takerBuyQuoteAssetVolume;
-
+    /**
+     * ，不理睬；忽视
+     */
     private BigDecimal ignore;
 
     public Long getOpenTime() {

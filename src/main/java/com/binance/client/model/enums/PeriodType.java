@@ -2,6 +2,9 @@ package com.binance.client.model.enums;
 
 import com.binance.client.impl.utils.EnumLookup;
 
+/**
+ *时期类型
+ */
 public enum PeriodType {
     _5m("5m"),
     _15m("15m"),

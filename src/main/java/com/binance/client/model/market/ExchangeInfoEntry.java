@@ -8,32 +8,68 @@ import java.util.Map;
 
 import java.math.BigDecimal;
 
+/**
+ * 交换信息进入 /条目
+ */
 public class ExchangeInfoEntry {
-
+    /**
+     * 符号
+     */
     private String symbol;
-
+    /**
+     * 状态
+     */
     private String status;
-
+    /**
+     * //请忽略
+     */
     private BigDecimal maintMarginPercent;
-
+    /**
+     *  // 请忽略
+     */
     private BigDecimal requiredMarginPercent;
 
+    /**
+     * 标的资产
+     */
     private String baseAsset;
 
+    /**
+     * 报价资产
+     */
     private String quoteAsset;
 
+    /**
+     * 价格小数点位数(仅作为系统精度使用，注意同tickSize 区分）
+     */
     private Long pricePrecision;
 
+    /**
+     * 数量小数点位数(仅作为系统精度使用，注意同stepSize 区分）
+     */
     private Long quantityPrecision;
-
+    /**
+     * 标的资产精度
+     */
     private Long baseAssetPrecision;
 
+    /**
+     * 报价资产精度
+     */
     private Long quotePrecision;
 
+    /**
+     * 订单类型
+     */
     private List<String> orderTypes;
-
+    /**
+     * 生效时间
+     */
     private List<String> timeInForce;
 
+    /**
+     * 过滤器
+     */
     private List<List<Map<String, String>>> filters;
 
     public String getSymbol() {

@@ -11,11 +11,18 @@ import org.slf4j.LoggerFactory;
 import com.binance.client.exception.BinanceApiException;
 import com.binance.client.impl.utils.JsonWrapper;
 
+/**
+ * Rest Api调用程序
+ */
 abstract class RestApiInvoker {
 
     private static final Logger log = LoggerFactory.getLogger(RestApiInvoker.class);
     private static final OkHttpClient client = new OkHttpClient();
 
+    /**
+     * 检查响应
+     * @param json
+     */
     static void checkResponse(JsonWrapper json) {
         try {
             if (json.containKey("success")) {
@@ -47,6 +54,12 @@ abstract class RestApiInvoker {
         }
     }
 
+    /**
+     * 调用 同步
+     * @param request
+     * @param <T>
+     * @return
+     */
     static <T> T callSync(RestApiRequest<T> request) {
         try {
             String str;
@@ -58,7 +71,7 @@ abstract class RestApiInvoker {
                 response.close();
             } else {
                 throw new BinanceApiException(BinanceApiException.ENV_ERROR,
-                        "[Invoking] Cannot get the response from server");
+                        "[Invoking] Cannot get the response from server 无法从服务器获取响应");
             }
             log.debug("Response =====> " + str);
             JsonWrapper jsonWrapper = JsonWrapper.parseFromString(str);
@@ -68,7 +81,7 @@ abstract class RestApiInvoker {
             throw e;
         } catch (Exception e) {
             throw new BinanceApiException(BinanceApiException.ENV_ERROR,
-                    "[Invoking] Unexpected error: " + e.getMessage());
+                    "[Invoking] Unexpected error:(调用)意想不到的错误 " + e.getMessage());
         }
     }
 

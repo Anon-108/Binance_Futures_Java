@@ -5,12 +5,24 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
+/**
+ * 订单薄
+ */
 public class OrderBook {
 
+    /**
+     * 最后更新id
+     */
     private Long lastUpdateId;
 
+    /**
+     * 买单
+     */
     private List<OrderBookEntry> bids;
 
+    /**
+     * 卖单
+     */
     private List<OrderBookEntry> asks;
 
     public Long getLastUpdateId() {

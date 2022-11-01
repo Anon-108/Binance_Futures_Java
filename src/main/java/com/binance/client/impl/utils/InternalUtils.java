@@ -8,6 +8,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.zip.GZIPInputStream;
 
+/**
+ * 内部工具类
+ */
 public abstract class InternalUtils {
 
   public static byte[] decode(byte[] data) throws IOException {

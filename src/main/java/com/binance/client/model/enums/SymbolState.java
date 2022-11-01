@@ -1,12 +1,24 @@
 package com.binance.client.model.enums;
 
+/**
+ * 符号状态
+ */
 public enum  SymbolState {
 
   /**
-   * ONLINE, OFFLINE, SUSPEND.
+   * ONLINE
+   * 在线
    */
   ONLINE("online"),
+  /**
+   *  OFFLINE
+   * 离线
+   */
   OFFLINE("offline"),
+  /**
+   * SUSPEND.
+   * 暂停。
+   */
   SUSPEND("suspend")
   ;
   private final String state;

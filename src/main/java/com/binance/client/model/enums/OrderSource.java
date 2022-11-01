@@ -3,7 +3,9 @@ package com.binance.client.model.enums;
 import com.binance.client.impl.utils.EnumLookup;
 
 /**
+ * 订单源
  * sys, web, api, app.
+ * 系统,web,api,app
  */
 public enum OrderSource {
   SYS("sys"),

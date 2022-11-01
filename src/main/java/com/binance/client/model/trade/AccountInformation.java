@@ -6,36 +6,83 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.List;
 import java.math.BigDecimal;
 
+/**
+ * 账户信息
+ */
 public class AccountInformation {
 
+    /**
+     * 是否可以入金
+     */
     private Boolean canDeposit;
 
+    /**
+     * 是否可以交易
+     */
     private Boolean canTrade;
 
+    /**
+     * 是否可以出金
+     */
     private Boolean canWithdraw;
 
+    /**
+     * 手续费等级
+     */
     private BigDecimal feeTier;
 
+    /**
+     * 最大可转出余额
+     */
     private BigDecimal maxWithdrawAmount;
 
+    /**
+     * 当前所需起始保证金总额(存在逐仓请忽略), 仅计算usdt资产
+     */
     private BigDecimal totalInitialMargin;
 
+    /**
+     * 维持保证金总额, 仅计算usdt资产
+     */
     private BigDecimal totalMaintMargin;
 
+    /**
+     *  保证金总余额, 仅计算usdt资产
+     */
     private BigDecimal totalMarginBalance;
 
+    /**
+     * 当前挂单所需起始保证金(基于最新标记价格), 仅计算usdt资产
+     */
     private BigDecimal totalOpenOrderInitialMargin;
 
+    /**
+     * 持仓所需起始保证金(基于最新标记价格), 仅计算usdt资产
+     */
     private BigDecimal totalPositionInitialMargin;
 
+    /**
+     * 持仓未实现盈亏总额, 仅计算usdt资产
+     */
     private BigDecimal totalUnrealizedProfit;
 
+    /**
+     * 账户总余额, 仅计算usdt资产
+     */
     private BigDecimal totalWalletBalance;
 
+    /**
+     * 更新时间
+     */
     private Long updateTime;
-
+    /**
+     * 资产
+     */
     private List<Asset> assets;
 
+    /**
+     * // 头寸，将返回所有市场symbol。
+     */
     private List<Position> positions;
 
     public Boolean getCanDeposit() {

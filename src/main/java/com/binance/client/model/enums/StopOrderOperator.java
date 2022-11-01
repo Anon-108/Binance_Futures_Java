@@ -1,8 +1,12 @@
 package com.binance.client.model.enums;
 
+/**
+ * 停止订购操作
+ */
 public enum StopOrderOperator {
     /**
      * GTE,greater than and equal (>=) ,LTE less than and equal (<=)
+     * GTE,大于等于(>=),LTE小于等于(<=)
      */
     GTE("gte", "greater than and equal (>=)"), LTE("lte", "less than and equal (<=)");
 
@@ -10,6 +14,11 @@ public enum StopOrderOperator {
 
     private String desc;
 
+    /**
+     *  停止订购操作
+     * @param operator
+     * @param desc
+     */
     StopOrderOperator(String operator, String desc) {
         this.operator = operator;
         this.desc = desc;
