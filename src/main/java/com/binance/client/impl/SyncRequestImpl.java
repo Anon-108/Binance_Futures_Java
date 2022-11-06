@@ -35,6 +35,11 @@ public class SyncRequestImpl implements SyncRequestClient {
         return RestApiInvoker.callSync(requestImpl.getExchangeInformation());
     }
 
+    @Override
+    public Long getServerTime() {
+        return RestApiInvoker.callSync(requestImpl.getServerTime());
+    }
+
     /**
      * 获取订单薄
      * @param symbol

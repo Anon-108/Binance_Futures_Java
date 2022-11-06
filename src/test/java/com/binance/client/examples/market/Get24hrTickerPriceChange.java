@@ -5,6 +5,8 @@ import com.binance.client.SyncRequestClient;
 
 import com.binance.client.examples.constants.PrivateConfig;
 
+import java.text.SimpleDateFormat;
+
 /**
  * 获取 24 小时股票价格变化
  */
@@ -18,7 +20,14 @@ public class Get24hrTickerPriceChange {
         RequestOptions options = new RequestOptions();
         SyncRequestClient syncRequestClient = SyncRequestClient.create(PrivateConfig.API_KEY, PrivateConfig.SECRET_KEY,
                 options);
-        System.out.println("------"+syncRequestClient.get24hrTickerPriceChange("EOSUSDT"));
+        System.out.println("\n------"+syncRequestClient.get24hrTickerPriceChange("EOSUSDT"));
+
+        Long serverTime = syncRequestClient.getServerTime();
+        String serverTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(serverTime);
+
+        System.out.println("\n"+serverTime);
+        System.out.println("\n"+serverTimeStr);
+
         // System.out.println(syncRequestClient.get24hrTickerPriceChange(null));
     }
 }

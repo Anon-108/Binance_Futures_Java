@@ -5,8 +5,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import com.binance.client.exception.BinanceApiException;
 import com.binance.client.impl.utils.JsonWrapper;
@@ -16,7 +16,7 @@ import com.binance.client.impl.utils.JsonWrapper;
  */
 abstract class RestApiInvoker {
 
-    private static final Logger log = LoggerFactory.getLogger(RestApiInvoker.class);
+//    private static final Logger log = LoggerFactory.getLogger(RestApiInvoker.class);
     private static final OkHttpClient client = new OkHttpClient();
 
     /**
@@ -63,7 +63,7 @@ abstract class RestApiInvoker {
     static <T> T callSync(RestApiRequest<T> request) {
         try {
             String str;
-            log.debug("Request URL " + request.request.url());
+//            log.debug("Request URL " + request.request.url());
             Response response = client.newCall(request.request).execute();
             // System.out.println(response.body().string());
             if (response != null && response.body() != null) {
@@ -73,7 +73,7 @@ abstract class RestApiInvoker {
                 throw new BinanceApiException(BinanceApiException.ENV_ERROR,
                         "[Invoking] Cannot get the response from server 无法从服务器获取响应");
             }
-            log.debug("Response =====> " + str);
+//            log.debug("Response =====> " + str);
             JsonWrapper jsonWrapper = JsonWrapper.parseFromString(str);
             checkResponse(jsonWrapper);
             return request.jsonParser.parseJson(jsonWrapper);

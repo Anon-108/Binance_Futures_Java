@@ -4,15 +4,20 @@ import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 /**
  *  烛台
  */
 public class Candlestick {
     /**
-     * 打开时间
+     * 开盘时间
      */
     private Long openTime;
+    /**
+     * 开盘时间
+     */
+    private String openTimeStr;
     /**
      * 开盘价
      */
@@ -26,38 +31,42 @@ public class Candlestick {
      */
     private BigDecimal low;
     /**
-     * 收盘价
+     * 收盘价(当前K线未结束的即为最新价)
      */
     private BigDecimal close;
     /**
-     * 量
+     * 成交量
      */
     private BigDecimal volume;
     /**
      * 收盘时间
      */
     private Long closeTime;
+    /**
+     * 收盘时间
+     */
+    private String closeTimeStr;
 
     /**
-     * 报价资产量
+     * 成交额
      */
     private BigDecimal quoteAssetVolume;
     /**
-     * 交易数量
+     * 成交笔数
      */
     private Integer numTrades;
 
     /**
-     * 接受者 购买基础资产量
+     * 主动买入成交量
      */
     private BigDecimal takerBuyBaseAssetVolume;
 
     /**
-     * 接收者 买入报价资产量
+     * 主动买入成交额
      */
     private BigDecimal takerBuyQuoteAssetVolume;
     /**
-     * ，不理睬；忽视
+     * 请忽略该参数
      */
     private BigDecimal ignore;
 
@@ -155,6 +164,28 @@ public class Candlestick {
 
     public void setIgnore(BigDecimal ignore) {
         this.ignore = ignore;
+    }
+
+    public String getOpenTimeStr() {
+        if (openTime > 0 ){
+            openTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(openTime);
+        }
+        return openTimeStr;
+    }
+
+    public void setOpenTimeStr(String openTimeStr) {
+        this.openTimeStr = openTimeStr;
+    }
+
+    public String getCloseTimeStr() {
+        if (closeTime > 0 ){
+            closeTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(closeTime);
+        }
+        return closeTimeStr;
+    }
+
+    public void setCloseTimeStr(String closeTimeStr) {
+        this.closeTimeStr = closeTimeStr;
     }
 
     @Override

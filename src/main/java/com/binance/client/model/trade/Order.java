@@ -4,6 +4,7 @@ import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 /**
  * 订单
@@ -81,6 +82,22 @@ public class Order {
      * 更新时间
      */
     private Long updateTime;
+
+    /**
+     * 更新时间
+     */
+    private String updateTimeStr;
+
+    public String getUpdateTimeStr() {
+        if (updateTime > 0 ){
+            updateTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(updateTime);
+        }
+        return updateTimeStr;
+    }
+
+    public void setUpdateTimeStr(String updateTimeStr) {
+        this.updateTimeStr = updateTimeStr;
+    }
 
     /**
      * 条件价格触发类型

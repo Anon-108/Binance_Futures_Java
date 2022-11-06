@@ -4,12 +4,27 @@ import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 public class SymbolTickerEvent {
 
     private String eventType;
 
     private Long eventTime;
+
+    private String eventTimeStr;
+
+    public String getEventTimeStr() {
+        if (eventTime > 0 ){
+            eventTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(eventTime);
+        }
+        return eventTimeStr;
+    }
+
+    public void setEventTimeStr(String eventTimeStr) {
+        this.eventTimeStr = eventTimeStr;
+    }
+
 
     private String symbol;
 
@@ -36,6 +51,33 @@ public class SymbolTickerEvent {
     private Long openTime;
 
     private Long closeTime;
+
+    private String openTimeStr;
+
+    private String closeTimeStr;
+
+    public String getOpenTimeStr() {
+        if (openTime > 0 ){
+            openTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(openTime);
+        }
+        return openTimeStr;
+    }
+
+    public void setOpenTimeStr(String openTimeStr) {
+        this.openTimeStr = openTimeStr;
+    }
+
+    public String getCloseTimeStr() {
+        if (closeTime > 0 ){
+            closeTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(closeTime);
+        }
+        return closeTimeStr;
+    }
+
+    public void setCloseTimeStr(String closeTimeStr) {
+        this.closeTimeStr = closeTimeStr;
+    }
+
 
     private Long firstId;
 

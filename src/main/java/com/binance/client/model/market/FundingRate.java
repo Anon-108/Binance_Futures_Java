@@ -4,6 +4,7 @@ import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 /**
  * 资金费率
@@ -14,14 +15,29 @@ public class FundingRate {
      */
     private String symbol;
     /**
-     * 最近更新的资金费率
+     * 资金费率
      */
     private BigDecimal fundingRate;
 
     /**
-     * 下次资金费时间
+     * 资金费时间
      */
     private Long fundingTime;
+    /**
+     * 资金费时间
+     */
+    private String fundingTimeStr;
+
+    public String getFundingTimeStr() {
+        if (fundingTime > 0 ){
+            fundingTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(fundingTime);
+        }
+        return fundingTimeStr;
+    }
+
+    public void setFundingTimeStr(String fundingTimeStr) {
+        this.fundingTimeStr = fundingTimeStr;
+    }
 
     public String getSymbol() {
         return symbol;

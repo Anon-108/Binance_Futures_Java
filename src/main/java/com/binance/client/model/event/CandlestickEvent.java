@@ -4,6 +4,7 @@ import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 public class CandlestickEvent {
 
@@ -11,11 +12,51 @@ public class CandlestickEvent {
 
     private Long eventTime;
 
+    private String eventTimeStr;
+
+    public String getEventTimeStr() {
+        if (eventTime > 0 ){
+            eventTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(eventTime);
+        }
+        return eventTimeStr;
+    }
+
+    public void setEventTimeStr(String eventTimeStr) {
+        this.eventTimeStr = eventTimeStr;
+    }
+
     private String symbol;
 
     private Long startTime;
 
     private Long closeTime;
+
+    private String startTimeStr;
+
+    public String getStartTimeStr() {
+        if (startTime > 0 ){
+            startTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(startTime);
+        }
+        return startTimeStr;
+    }
+
+    public void setStartTimeStr(String startTimeStr) {
+        this.startTimeStr = startTimeStr;
+    }
+
+    private String closeTimeStr;
+
+    public String getCloseTimeStr() {
+        if (closeTime > 0 ){
+            closeTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(closeTime);
+        }
+
+        return closeTimeStr;
+    }
+
+    public void setCloseTimeStr(String closeTimeStr) {
+        this.closeTimeStr = closeTimeStr;
+    }
 
     private String interval;
 

@@ -1,6 +1,7 @@
 package com.binance.client.model.market;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 /**
  * 未平仓合约统计
@@ -23,6 +24,21 @@ public class OpenInterestStat {
      * 时间戳
      */
     private Long timestamp;
+    /**
+     * 时间戳
+     */
+    private String timestampStr;
+
+    public String getTimestampStr() {
+        if (timestamp > 0 ){
+            timestampStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(timestamp);
+        }
+        return timestampStr;
+    }
+
+    public void setTimestampStr(String timestampStr) {
+        this.timestampStr = timestampStr;
+    }
 
     public String getSymbol() {
         return symbol;

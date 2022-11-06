@@ -4,8 +4,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import com.binance.client.constant.BinanceApiConstants;
 import com.binance.client.exception.BinanceApiException;
@@ -16,7 +16,7 @@ import com.binance.client.impl.utils.JsonWrapper;
  */
 public class WebSocketConnection extends WebSocketListener {
 
-    private static final Logger log = LoggerFactory.getLogger(WebSocketConnection.class);
+//    private static final Logger log = LoggerFactory.getLogger(WebSocketConnection.class);
     /**
      * 连接计数器
      */
@@ -75,7 +75,7 @@ public class WebSocketConnection extends WebSocketListener {
         this.okhttpRequest = request.authHandler == null ? new Request.Builder().url(subscriptionUrl).build()
                 : new Request.Builder().url(subscriptionUrl).build();
         this.watchDog = watchDog;
-        log.info("[Sub] Connection [id [订阅] 连接 [id: " + this.connectionId + "] created for 为……创建 " + request.name);
+//        //loginfo("[Sub] Connection [id [订阅] 连接 [id: " + this.connectionId + "] created for 为……创建 " + request.name);
     }
 
     /**
@@ -91,10 +91,10 @@ public class WebSocketConnection extends WebSocketListener {
      */
     void connect() {
         if (state == ConnectionState.CONNECTED) {
-            log.info("[Sub][" + this.connectionId + "] Already connected 已经连接");
+//            //loginfo("[Sub][" + this.connectionId + "] Already connected 已经连接");
             return;
         }
-        log.info("[Sub][" + this.connectionId + "] Connecting...");
+//        //loginfo("[Sub][" + this.connectionId + "] Connecting...");
         webSocket = RestApiInvoker.createWebSocket(okhttpRequest, this);
     }
 
@@ -103,7 +103,7 @@ public class WebSocketConnection extends WebSocketListener {
      * @param delayInSecond
      */
     void reConnect(int delayInSecond) {
-        log.warn("[Sub][" + this.connectionId + "] Reconnecting after 重新连接后 " + delayInSecond + " seconds later 几秒钟后");
+        ////logwarn("[Sub][" + this.connectionId + "] Reconnecting after 重新连接后 " + delayInSecond + " seconds later 几秒钟后");
         if (webSocket != null) {
             webSocket.cancel();
             webSocket = null;
@@ -137,12 +137,12 @@ public class WebSocketConnection extends WebSocketListener {
      */
     void send(String str) {
         boolean result = false;
-        log.debug("[Send]{}", str);
+        //logdebug("[Send]{}", str);
         if (webSocket != null) {
             result = webSocket.send(str);
         }
         if (!result) {
-            log.error("[Sub][" + this.connectionId + "] Failed to send message 发送消息失败");
+            //logerror("[Sub][" + this.connectionId + "] Failed to send message 发送消息失败");
             closeOnError();
         }
     }
@@ -157,7 +157,7 @@ public class WebSocketConnection extends WebSocketListener {
         super.onMessage(webSocket, text);
         lastReceivedTime = System.currentTimeMillis();
 
-        log.debug("[On Message]:{}", text);
+        //logdebug("[On Message]:{}", text);
         try {
             JsonWrapper jsonWrapper = JsonWrapper.parseFromString(text);
 
@@ -168,7 +168,7 @@ public class WebSocketConnection extends WebSocketListener {
             }
 
         } catch (Exception e) {
-            log.error("[On Message][{}]: catch exception:", connectionId, e);
+            //logerror("[On Message][{}]: catch exception:", connectionId, e);
             closeOnError();
         }
     }
@@ -183,7 +183,7 @@ public class WebSocketConnection extends WebSocketListener {
             BinanceApiException exception = new BinanceApiException(BinanceApiException.SUBSCRIPTION_ERROR, errorMessage, e);
             request.errorHandler.onError(exception);
         }
-        log.error("[Sub][" + this.connectionId + "] " + errorMessage);
+        //logerror("[Sub][" + this.connectionId + "] " + errorMessage);
     }
 
     /**
@@ -228,7 +228,7 @@ public class WebSocketConnection extends WebSocketListener {
      * 关闭
      */
     public void close() {
-        log.info("[Sub][" + this.connectionId + "] Closing normally 正常关闭");
+        //loginfo("[Sub][" + this.connectionId + "] Closing normally 正常关闭");
         webSocket.cancel();
         webSocket = null;
         watchDog.onClosedNormally(this);
@@ -258,7 +258,7 @@ public class WebSocketConnection extends WebSocketListener {
     public void onOpen(WebSocket webSocket, Response response) {
         super.onOpen(webSocket, response);
         this.webSocket = webSocket;
-        log.info("[Sub][" + this.connectionId + "] Connected to server 连接到服务器");
+        //loginfo("[Sub][" + this.connectionId + "] Connected to server 连接到服务器");
         watchDog.onConnectionCreated(this);
         if (request.connectionHandler != null) {
             request.connectionHandler.handle(this);
@@ -286,7 +286,7 @@ public class WebSocketConnection extends WebSocketListener {
         if (webSocket != null) {
             this.webSocket.cancel();
             state = ConnectionState.CLOSED_ON_ERROR;
-            log.error("[Sub][" + this.connectionId + "] Connection is closing due to error 连接因错误而关闭");
+            //logerror("[Sub][" + this.connectionId + "] Connection is closing due to error 连接因错误而关闭");
         }
     }
 }

@@ -3,6 +3,8 @@ package com.binance.client.model.trade;
 import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.text.SimpleDateFormat;
+
 /**
  * 钱包增量日志
  * @author : wangwanlu
@@ -29,6 +31,21 @@ public class WalletDeltaLog {
      * 时间
      */
     private Long time;
+
+    private String timeStr;
+
+    public String getTimeStr() {
+        if (time > 0 ){
+            timeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(time);
+        }
+        return timeStr;
+    }
+
+    public void setTimeStr(String timeStr) {
+        this.timeStr = timeStr;
+    }
+
+
     /**
      * 持仓方向
      */

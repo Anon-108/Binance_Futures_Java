@@ -4,12 +4,27 @@ import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 public class MarkPriceEvent {
 
     private String eventType;
 
     private Long eventTime;
+
+    private String eventTimeStr;
+
+    public String getEventTimeStr() {
+        if (eventTime > 0 ){
+            eventTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(eventTime);
+        }
+        return eventTimeStr;
+    }
+
+    public void setEventTimeStr(String eventTimeStr) {
+        this.eventTimeStr = eventTimeStr;
+    }
+
 
     private String symbol;
 
@@ -18,6 +33,18 @@ public class MarkPriceEvent {
     private BigDecimal fundingRate;
 
     private Long nextFundingTime;
+    private String nextFundingTimeStr;
+
+    public String getNextFundingTimeStr() {
+        if (nextFundingTime > 0 ){
+            nextFundingTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(nextFundingTime);
+        }
+        return nextFundingTimeStr;
+    }
+
+    public void setNextFundingTimeStr(String nextFundingTimeStr) {
+        this.nextFundingTimeStr = nextFundingTimeStr;
+    }
 
     public String getEventType() {
         return eventType;

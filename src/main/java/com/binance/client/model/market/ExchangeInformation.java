@@ -3,6 +3,7 @@ package com.binance.client.model.market;
 import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -17,6 +18,22 @@ public class ExchangeInformation {
      * 如果需要获取当前系统时间，请查询接口 “GET /fapi/v1/time”
      */
     private Long serverTime;
+    /**
+     * 如果需要获取当前系统时间，请查询接口 “GET /fapi/v1/time”
+     */
+    private String serverTimeStr;
+
+    public String getServerTimeStr() {
+        if (serverTime > 0 ){
+            serverTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(serverTime);
+        }
+        return serverTimeStr;
+    }
+
+    public void setServerTimeStr(String serverTimeStr) {
+        this.serverTimeStr = serverTimeStr;
+    }
+
     /**
      * API访问的限制
      */

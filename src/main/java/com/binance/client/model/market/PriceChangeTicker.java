@@ -4,6 +4,7 @@ import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 /**
  * 价格变化代码
@@ -73,6 +74,32 @@ public class PriceChangeTicker {
      * 24小时内，最后一笔交易的发生时间
      */
     private Long closeTime;
+
+    private String openTimeStr;
+
+    private String closeTimeStr;
+
+    public String getOpenTimeStr() {
+        if (openTime > 0 ){
+            openTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(openTime);
+        }
+        return openTimeStr;
+    }
+
+    public void setOpenTimeStr(String openTimeStr) {
+        this.openTimeStr = openTimeStr;
+    }
+
+    public String getCloseTimeStr() {
+        if (closeTime > 0 ){
+            closeTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(closeTime);
+        }
+        return closeTimeStr;
+    }
+
+    public void setCloseTimeStr(String closeTimeStr) {
+        this.closeTimeStr = closeTimeStr;
+    }
 
     /**
      * 首笔成交id

@@ -4,12 +4,15 @@ import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 /**
  * 交易
  */
 public class Trade {
-
+    /**
+     * 成交ID
+     */
     private Long id;
 
     /**
@@ -29,6 +32,20 @@ public class Trade {
      * 时间
      */
     private Long time;
+
+    private String timeStr;
+
+    public String getTimeStr() {
+        if (time > 0 ){
+            timeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(time);
+        }
+        return timeStr;
+    }
+
+    public void setTimeStr(String timeStr) {
+        this.timeStr = timeStr;
+    }
+
 
     /**
      * 买方是否为挂单方

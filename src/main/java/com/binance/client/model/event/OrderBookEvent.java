@@ -3,6 +3,7 @@ package com.binance.client.model.event;
 import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.binance.client.model.market.OrderBookEntry;
@@ -13,7 +14,34 @@ public class OrderBookEvent {
 
     private Long eventTime;
 
+    private String eventTimeStr;
+
+    public String getEventTimeStr() {
+        if (eventTime > 0 ){
+            eventTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(eventTime);
+        }
+        return eventTimeStr;
+    }
+
+    public void setEventTimeStr(String eventTimeStr) {
+        this.eventTimeStr = eventTimeStr;
+    }
+
+
     private Long transactionTime;
+
+    private String transactionTimeStr;
+
+    public String getTransactionTimeStr() {
+        if (transactionTime > 0 ){
+            transactionTimeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(transactionTime);
+        }
+        return transactionTimeStr;
+    }
+
+    public void setTransactionTimeStr(String transactionTimeStr) {
+        this.transactionTimeStr = transactionTimeStr;
+    }
 
     private String symbol;
 

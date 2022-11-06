@@ -84,6 +84,12 @@ public interface SyncRequestClient {
     ExchangeInformation getExchangeInformation();
 
     /**
+     * 获取服务器时间
+     * @return
+     */
+    Long getServerTime();
+
+    /**
      * Fetch order book.
      * 获取订单簿。
      *

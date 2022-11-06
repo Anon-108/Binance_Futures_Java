@@ -1,6 +1,7 @@
 package com.binance.client.model.market;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 /**
  *  接受者 多空统计
@@ -23,6 +24,20 @@ public class TakerLongShortStat {
      * 时间
      */
     private Long timestamp;
+
+    private String timestampStr;
+
+    public String getTimestampStr() {
+        if (timestamp > 0 ){
+            timestampStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(timestamp);
+        }
+        return timestampStr;
+    }
+
+    public void setTimestampStr(String timestampStr) {
+        this.timestampStr = timestampStr;
+    }
+
 
     public BigDecimal getBuySellRatio() {
         return buySellRatio;

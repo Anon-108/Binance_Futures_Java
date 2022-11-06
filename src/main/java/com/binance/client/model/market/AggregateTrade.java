@@ -4,35 +4,55 @@ import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 /**
  * 综合交易
  */
 public class AggregateTrade {
-
+    /**
+     *  归集成交ID
+     */
     private Long id;
     /**
-     * 价格
+     * 成交价
      */
     private BigDecimal price;
     /**
-     * 数量
+     * 成交量
      */
     private BigDecimal qty;
     /**
-     * 第一个id
+     * 被归集的首个成交ID
      */
     private Long firstId;
     /**
-     * 最后一个id
+     * 被归集的末个成交ID
      */
     private Long lastId;
     /**
-     * 时间
+     * 成交时间
      */
     private Long time;
+
     /**
-     * 是买家制造商
+     * 成交时间
+     */
+    private String timeStr;
+
+    public String getTimeStr() {
+        if (time > 0 ){
+            timeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(time);
+        }
+        return timeStr;
+    }
+
+    public void setTimeStr(String timeStr) {
+        this.timeStr = timeStr;
+    }
+
+    /**
+     * 是否为主动卖出单
      */
     private Boolean isBuyerMaker;
 

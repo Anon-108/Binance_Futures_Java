@@ -4,6 +4,7 @@ import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 /**
  * 平仓/清算订单
@@ -52,6 +53,19 @@ public class LiquidationOrder {
      * 时间
      */
     private Long time;
+
+    private String timeStr;
+
+    public String getTimeStr() {
+        if (time > 0 ){
+            timeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(time);
+        }
+        return timeStr;
+    }
+
+    public void setTimeStr(String timeStr) {
+        this.timeStr = timeStr;
+    }
 
     public String getSymbol() {
         return symbol;

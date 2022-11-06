@@ -231,12 +231,83 @@ class RestApiRequestImpl {
     }
 
     /**
+     * 获取交易所时间
+     * @return
+     */
+    RestApiRequest<Long> getServerTime() {
+        RestApiRequest<Long> request = new RestApiRequest<>();
+        UrlParamsBuilder builder = UrlParamsBuilder.build();
+        request.request = createRequestByGet("/fapi/v1/time", builder);
+
+        request.jsonParser = (jsonWrapper -> {
+            return jsonWrapper.getLong("serverTime");
+        });
+//            ExchangeInformation result = new ExchangeInformation();
+//            result.setTimezone(jsonWrapper.getString("timezone"));
+//            result.setServerTime(jsonWrapper.getLong("serverTime"));
+//
+//            List<RateLimit> elementList = new LinkedList<>();
+//            JsonWrapperArray dataArray = jsonWrapper.getJsonArray("rateLimits");
+//            dataArray.forEach((item) -> {
+//                RateLimit element = new RateLimit();
+//                element.setRateLimitType(item.getString("rateLimitType"));
+//                element.setInterval(item.getString("interval"));
+//                element.setIntervalNum(item.getLong("intervalNum"));
+//                element.setLimit(item.getLong("limit"));
+//                elementList.add(element);
+//            });
+//            result.setRateLimits(elementList);
+//
+//            List<ExchangeFilter> filterList = new LinkedList<>();
+//            JsonWrapperArray filterArray = jsonWrapper.getJsonArray("exchangeFilters");
+//            filterArray.forEach((item) -> {
+//                ExchangeFilter filter = new ExchangeFilter();
+//                filter.setFilterType(item.getString("filterType"));
+//                filter.setMaxNumOrders(item.getLong("maxNumOrders"));
+//                filter.setMaxNumAlgoOrders(item.getLong("maxNumAlgoOrders"));
+//                filterList.add(filter);
+//            });
+//            result.setExchangeFilters(filterList);
+//
+//            List<ExchangeInfoEntry> symbolList = new LinkedList<>();
+//            JsonWrapperArray symbolArray = jsonWrapper.getJsonArray("symbols");
+//            symbolArray.forEach((item) -> {
+//                ExchangeInfoEntry symbol = new ExchangeInfoEntry();
+//                symbol.setSymbol(item.getString("symbol"));
+//                symbol.setStatus(item.getString("status"));
+//                symbol.setMaintMarginPercent(item.getBigDecimal("maintMarginPercent"));
+//                symbol.setRequiredMarginPercent(item.getBigDecimal("requiredMarginPercent"));
+//                symbol.setBaseAsset(item.getString("baseAsset"));
+//                symbol.setQuoteAsset(item.getString("quoteAsset"));
+//                symbol.setPricePrecision(item.getLong("pricePrecision"));
+//                symbol.setQuantityPrecision(item.getLong("quantityPrecision"));
+//                symbol.setBaseAssetPrecision(item.getLong("baseAssetPrecision"));
+//                symbol.setQuotePrecision(item.getLong("quotePrecision"));
+//                symbol.setOrderTypes(item.getJsonArray("orderTypes").convert2StringList());
+//                symbol.setTimeInForce(item.getJsonArray("orderTypes").convert2StringList());
+//                List<List<Map<String, String>>> valList = new LinkedList<>();
+//                JsonWrapperArray valArray = item.getJsonArray("filters");
+//                valArray.forEach((val) -> {
+//                    valList.add(val.convert2DictList());
+//                });
+//                symbol.setFilters(valList);
+//                symbolList.add(symbol);
+//            });
+//            result.setSymbols(symbolList);
+//
+//            return result;
+//        });
+        return request;
+    }
+
+    /**
      * 获取交易所信息
      * @return
      */
     RestApiRequest<ExchangeInformation> getExchangeInformation() {
         RestApiRequest<ExchangeInformation> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build();
+        //TODO 接收字段是旧版本,需要更新响应字段(添加)
         request.request = createRequestByGet("/fapi/v1/exchangeInfo", builder);
 
         request.jsonParser = (jsonWrapper -> {
@@ -373,7 +444,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * getOldTrades
+     * 查询历史成交
      * @param symbol
      * @param limit
      * @param fromId
@@ -407,7 +478,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 获取聚合交易
+     * 近期成交(归集)
      * @param symbol
      * @param fromId
      * @param startTime
@@ -447,12 +518,12 @@ class RestApiRequestImpl {
     }
 
     /**
-     *
-     * @param symbol
-     * @param interval 间隔
-     * @param startTime
-     * @param endTime
-     * @param limit
+     *K线数据
+     * @param symbol 交易对
+     * @param interval 时间间隔
+     * @param startTime 起始时间
+     * @param endTime 结束时间
+     * @param limit 默认值:500 最大值:1500.
      * @return
      */
     RestApiRequest<List<Candlestick>> getCandlestick(String symbol, CandlestickInterval interval, Long startTime,
@@ -491,8 +562,21 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /*
+    TODO 需要更新接口: 连续合约K线数据
+        GET /fapi/v1/continuousKlines 每根K线的开盘时间可视为唯一ID
+     */
+    /*
+    TODO 需要更新接口: 价格指数K线数据
+       GET /fapi/v1/indexPriceKlines
+     */
+    /*
+    TODO 需要更新接口: 标记价格K线数据
+       GET /fapi/v1/markPriceKlines 每根K线的开盘时间可视为唯一ID
+     */
+
     /**
-     * 获取标记价格
+     * 最新标记价格和资金费率
      * @param symbol
      * @return
      */
@@ -500,6 +584,7 @@ class RestApiRequestImpl {
         RestApiRequest<List<MarkPrice>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build()
                 .putToUrl("symbol", symbol);
+        //TODO 接收字段是旧版本,需要更新响应字段(添加)
         request.request = createRequestByGet("/fapi/v1/premiumIndex", builder);
 
         request.jsonParser = (jsonWrapper -> {
@@ -527,7 +612,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 获取资金费率
+     * 查询资金费率历史
      * @param symbol
      * @param startTime
      * @param endTime
@@ -560,7 +645,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 获取 24 小时股票价格变化
+     * 24hr价格变动情况
      * @param symbol
      * @return
      */
@@ -605,7 +690,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 获取符号价格代码
+     * 最新价格
      * @param symbol
      * @return
      */
@@ -636,7 +721,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 获取符号订单薄代码/股票
+     * 当前最优挂单
      * @param symbol
      * @return
      */
@@ -661,6 +746,7 @@ class RestApiRequestImpl {
                 element.setBidQty(item.getBigDecimal("bidQty"));
                 element.setAskPrice(item.getBigDecimal("askPrice"));
                 element.setAskQty(item.getBigDecimal("askQty"));
+                element.setTime(item.getLong("time"));
                 result.add(element);
             });
 
@@ -668,6 +754,11 @@ class RestApiRequestImpl {
         });
         return request;
     }
+
+    /*
+    TODO 需要更新接口: 获取未平仓合约数
+       GET /fapi/v1/openInterest
+     */
 
     /**
      * 获取清算/平仓订单
@@ -711,7 +802,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * post批量订单
+     * 批量下订单
      * @param batchOrders
      * @return
      */
@@ -761,7 +852,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * post订单
+     * 下订单
      * @param symbol
      * @param side
      * @param positionSide
@@ -820,7 +911,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 改变位置侧/面
+     * 更改持仓模式
      * @param dual
      * @return
      */
@@ -840,7 +931,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 更改保证金类型
+     * 变换逐/全仓模式
      * @param symbolName
      * @param marginType 保证金类型
      * @return
@@ -862,7 +953,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 添加持仓保证金
+     * 调整逐仓保证金
      * @param symbolName
      * @param type
      * @param amount
@@ -890,7 +981,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 获取持仓保证金历史记录
+     * 逐仓保证金变动历史
      * @param symbolName
      * @param type
      * @param startTime
@@ -927,7 +1018,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 获取持仓模式
+     * 查询持仓模式
      * @return
      */
     RestApiRequest<JSONObject> getPositionSide() {
@@ -942,6 +1033,27 @@ class RestApiRequestImpl {
         });
         return request;
     }
+
+    /*
+    TODO 更改联合保证金模式(TRADE)
+    响应:
+
+    {
+        "code": 200,
+        "msg": "success"
+    }
+    POST /fapi/v1/multiAssetsMargin (HMAC SHA256)
+     */
+
+    /*
+    TODO 查询联合保证金模式(USER_DATA)
+    响应:
+
+    {
+        "multiAssetsMargin": true // "true": 联合保证金模式开启；"false": 联合保证金模式关闭
+    }
+    GET /fapi/v1/multiAssetsMargin (HMAC SHA256)
+     */
 
     /**
      * 取消订单
@@ -982,7 +1094,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 取消所以打开订单
+     * 撤销全部订单
      * @param symbol
      * @return
      */
@@ -1058,8 +1170,21 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /*
+    TODO 倒计时撤销所有订单 (TRADE)
+        响应:
+
+        {
+            "symbol": "BTCUSDT",
+            "countdownTime": "100000"
+        }
+        POST /fapi/v1/countdownCancelAll (HMAC SHA256)
+
+        权重: 10
+     */
+
     /**
-     * 获得订单
+     * 查询订单
      * @param symbol
      * @param orderId
      * @param origClientOrderId
@@ -1096,8 +1221,18 @@ class RestApiRequestImpl {
         return request;
     }
 
+    /*
+    TODO 测试下单接口 (TRADE)
+    响应:
+
+    字段与下单接口一致，但均为无效值
+    POST /fapi/v1/order/test (HMAC SHA256)
+
+    用于测试订单请求，但不会提交到撮合引擎
+     */
+
     /**
-     * 获取打开订单
+     * 查看当前全部挂单
      * @param symbol
      * @return
      */
@@ -1136,7 +1271,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 获取所以订单
+     * 查询所有订单(包括历史订单)
      * @param symbol
      * @param orderId
      * @param startTime
@@ -1189,6 +1324,7 @@ class RestApiRequestImpl {
     RestApiRequest<List<AccountBalance>> getBalance() {
         RestApiRequest<List<AccountBalance>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build();
+        //TODO api文当中 v1已经弃用.  新的api: GET /fapi/v2/balance (HMAC SHA256)
         request.request = createRequestByGetWithSignature("/fapi/v1/balance", builder);
 
         request.jsonParser = (jsonWrapper -> {
@@ -1213,6 +1349,7 @@ class RestApiRequestImpl {
     RestApiRequest<AccountInformation> getAccountInformation() {
         RestApiRequest<AccountInformation> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build();
+        //TODO api中v1已弃用,改为api:GET /fapi/v2/account (HMAC SHA256)
         request.request = createRequestByGetWithSignature("/fapi/v1/account", builder);
 
         request.jsonParser = (jsonWrapper -> {
@@ -1271,7 +1408,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 改变初始杠杆
+     * 调整开仓杠杆
      * @param symbol
      * @param leverage
      * @return
@@ -1298,13 +1435,13 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 获取持仓风险
+     * 用户持仓风险
      * @return
      */
     RestApiRequest<List<PositionRisk>> getPositionRisk() {
         RestApiRequest<List<PositionRisk>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build();
-        //TODO  v2 较‘/fapi/v1/positionRisk’ 性能有较大改善
+        //TODO v1已弃用, 新api: GET /fapi/v2/positionRisk (HMAC SHA256) v2 较‘/fapi/v1/positionRisk’ 性能有较大改善
         request.request = createRequestByGetWithSignature("/fapi/v1/positionRisk", builder);
 
         request.jsonParser = (jsonWrapper -> {
@@ -1335,7 +1472,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 获取账户交易
+     * 账户成交历史
      * @param symbol
      * @param startTime
      * @param endTime
@@ -1382,7 +1519,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 获取收入历史
+     * 获取账户损益资金流水
      * @param symbol
      * @param incomeType
      * @param startTime
@@ -1417,6 +1554,274 @@ class RestApiRequestImpl {
         });
         return request;
     }
+
+    /*
+    TODO 杠杆分层标准 (USER_DATA) GET /fapi/v1/leverageBracket
+
+    响应:
+
+    [
+        {
+            "symbol": "ETHUSDT",
+            "brackets": [
+                {
+                    "bracket": 1,   // 层级
+                    "initialLeverage": 75,  // 该层允许的最高初始杠杆倍数
+                    "notionalCap": 10000,  // 该层对应的名义价值上限
+                    "notionalFloor": 0,  // 该层对应的名义价值下限
+                    "maintMarginRatio": 0.0065, // 该层对应的维持保证金率
+                    "cum":0 // 速算数
+                },
+            ]
+        }
+    ]
+    或 (若发送symbol)
+
+
+    {
+        "symbol": "ETHUSDT",
+        "brackets": [
+            {
+                "bracket": 1,
+                "initialLeverage": 75,
+                "notionalCap": 10000,
+                "notionalFloor": 0,
+                "maintMarginRatio": 0.0065,
+                "cum":0
+            },
+        ]
+    }
+     */
+
+    /*
+    TODO 持仓ADL队列估算 (USER_DATA) GET /fapi/v1/adlQuantile
+        响应:
+
+        [
+            {
+                "symbol": "ETHUSDT",
+                "adlQuantile":
+                    {
+                        // 对于全仓状态下的双向持仓模式的交易对，会返回 "LONG", "SHORT" 和 "HEDGE", 其中"HEDGE"的存在仅作为标记;如果多空均有持仓的情况下,"LONG"和"SHORT"应返回共同计算后相同的队列分数。
+                        "LONG": 3,
+                        "SHORT": 3,
+                        "HEDGE": 0   // HEDGE 仅作为指示出现，请忽略数值
+                    }
+                },
+            {
+                "symbol": "BTCUSDT",
+                "adlQuantile":
+                    {
+                        // 对于单向持仓模式或者是逐仓状态下的双向持仓模式的交易对，会返回 "LONG", "SHORT" 和 "BOTH" 分别表示不同持仓方向上持仓的adl队列分数
+                        "LONG": 1,  // 双开模式下多头持仓的ADL队列估算分
+                        "SHORT": 2,     // 双开模式下空头持仓的ADL队列估算分
+                        "BOTH": 0       // 单开模式下持仓的ADL队列估算分
+                    }
+            }
+         ]
+     */
+
+    /*
+    TODO  用户强平单历史 (USER_DATA) GET /fapi/v1/forceOrders
+        权重: 带symbol 20, 不带symbol 50
+        响应:
+
+        [
+          {
+            "orderId": 6071832819,
+            "symbol": "BTCUSDT",
+            "status": "FILLED",
+            "clientOrderId": "autoclose-1596107620040000020",
+            "price": "10871.09",
+            "avgPrice": "10913.21000",
+            "origQty": "0.001",
+            "executedQty": "0.001",
+            "cumQuote": "10.91321",
+            "timeInForce": "IOC",
+            "type": "LIMIT",
+            "reduceOnly": false,
+            "closePosition": false,
+            "side": "SELL",
+            "positionSide": "BOTH",
+            "stopPrice": "0",
+            "workingType": "CONTRACT_PRICE",
+            "origType": "LIMIT",
+            "time": 1596107620044,
+            "updateTime": 1596107620087
+          }
+          {
+            "orderId": 6072734303,
+            "symbol": "BTCUSDT",
+            "status": "FILLED",
+            "clientOrderId": "adl_autoclose",
+            "price": "11023.14",
+            "avgPrice": "10979.82000",
+            "origQty": "0.001",
+            "executedQty": "0.001",
+            "cumQuote": "10.97982",
+            "timeInForce": "GTC",
+            "type": "LIMIT",
+            "reduceOnly": false,
+            "closePosition": false,
+            "side": "BUY",
+            "positionSide": "SHORT",
+            "stopPrice": "0",
+            "workingType": "CONTRACT_PRICE",
+            "origType": "LIMIT",
+            "time": 1596110725059,
+            "updateTime": 1596110725071
+          }
+        ]
+     */
+
+    /*
+    TODO 合约交易量化规则指标 (USER_DATA) GET /fapi/v1/apiTradingStatus
+    更多细节, 请参考合约交易量化规则
+    权重:
+
+    带 symbol 1
+    不带 10
+    响应:
+
+    {
+        "indicators": { // indicator:风控指标名, value:用户在该市场的风控指标数值, triggerValue:阈值, 对于没有达到记录阈值的则不返回数据。
+            "BTCUSDT": [
+                {
+                    "isLocked": true, // 用户该品种交易是否被风控禁用
+                    "plannedRecoverTime": 1545741270000, // 预计恢复时间，若当前时间大等于预计恢复时间则为空
+                    "indicator": "UFR",  // Unfilled Ratio (UFR)
+                    "value": 0.05,  // Current value
+                    "triggerValue": 0.995  // Trigger value
+                },
+                {
+                    "isLocked": true, // 用户该品种交易是否被风控禁用
+                    "plannedRecoverTime": 1545741270000,
+                    "indicator": "IFER",  // IOC/FOK Expiration Ratio (IFER)
+                    "value": 0.99,  // Current value
+                    "triggerValue": 0.99  // Trigger value
+                },
+                {
+                    "isLocked": true, // 用户该品种交易是否被风控禁用
+                    "plannedRecoverTime": 1545741270000,
+                    "indicator": "GCR",  // GTC Cancellation Ratio (GCR)
+                    "value": 0.99,  // Current value
+                    "triggerValue": 0.99  // Trigger value
+                },
+                {
+                    "isLocked": true, // 用户该品种交易是否被风控禁用
+                    "plannedRecoverTime": 1545741270000,
+                    "indicator": "DR",  // Dust Ratio (DR)
+                    "value": 0.99,  // Current value
+                    "triggerValue": 0.99  // Trigger value
+                }
+            ],
+            "ETHUSDT": [
+                {
+                    "isLocked": true, // 用户该品种交易是否被风控禁用
+                    "plannedRecoverTime": 1545741270000,
+                    "indicator": "UFR",
+                    "value": 0.05,
+                    "triggerValue": 0.995
+                },
+                {
+                    "isLocked": true, // 用户该品种交易是否被风控禁用
+                    "plannedRecoverTime": 1545741270000,
+                    "indicator": "IFER",
+                    "value": 0.99,
+                    "triggerValue": 0.99
+                },
+                {
+                    "isLocked": true, // 用户该品种交易是否被风控禁用
+                    "plannedRecoverTime": 1545741270000,
+                    "indicator": "GCR",
+                    "value": 0.99,
+                    "triggerValue": 0.99
+                }
+                {
+                    "isLocked": true, // 用户该品种交易是否被风控禁用
+                    "plannedRecoverTime": 1545741270000,
+                    "indicator": "DR",
+                    "value": 0.99,
+                    "triggerValue": 0.99
+                }
+            ]
+        },
+        "updateTime": 1545741270000 // 返回值的更新时间
+    }
+    或(触发账号层级违规时)
+
+    {
+        "indicators":{
+            "ACCOUNT":[
+                {
+                    "indicator":"TMV",  //  Too many violations 多交易对触发账号层级违规
+                    "value":10,
+                    "triggerValue":1,
+                    "plannedRecoverTime":1644919865000,
+                    "isLocked":true
+                }
+            ]
+        },
+        "updateTime":1644913304748
+    }
+     */
+
+    /*
+    TODO 用户手续费率 (USER_DATA) GET /fapi/v1/commissionRate (HMAC SHA256)
+
+    权重: 20
+    响应:
+
+    {
+        "symbol": "BTCUSDT",
+        "makerCommissionRate": "0.0002",  // 0.02%
+        "takerCommissionRate": "0.0004"   // 0.04%
+    }
+
+     */
+
+    /*
+    TODO 获取合约资金流水下载Id (USER_DATA) GET /fapi/v1/income/asyn (HMAC SHA256)
+    存在每月5次的请求限制，网页端和Rest接口下载次数共用。
+    权重: 5
+    响应:
+
+    {
+        "avgCostTimestampOfLast30d":7241837, //过去30天平均数据下载时间
+        "downloadId":"546975389218332672",   //下载Id
+
+    }
+
+     */
+
+    /*
+    TODO  通过下载Id获取合约资金流水下载链接 (USER_DATA) GET /fapi/v1/income/asyn/id (HMAC SHA256)
+
+        权重: 5
+        下载链接有效期：24小时。
+        响应:
+
+        {
+            "downloadId":"545923594199212032", // 下载Id
+            "status":"completed",     // 状态，枚举类型：completed 已完成，processing 处理中
+            "url":"www.binance.com",  // 适配该笔ID请求的下载链接
+            "notified":true,          // 忽略
+            "expirationTimestamp":1645009771000,  // 晚于该时间戳之后链接将自动失效
+            "isExpired":null,
+
+        }
+        或 (服务器仍在处理中会返回)
+
+        {
+            "downloadId":"545923594199212032",
+            "status":"processing",
+            "url":"",
+            "notified":false,
+            "expirationTimestamp":-1
+            "isExpired":null,
+
+        }
+     */
 
     /**
      * 启动用户数据流
@@ -1513,7 +1918,7 @@ class RestApiRequestImpl {
     }
 
     /**
-     * 获得大户账户数多空比/获得顶级交易者账户比率
+     * 大户账户数多空比
      * @param symbol
      * @param period
      * @param startTime
@@ -1670,5 +2075,16 @@ class RestApiRequestImpl {
         });
         return request;
     }
-
+    /*
+    TODO 需要更新接口: 杠杆代币历史净值K线
+       GET /fapi/v1/lvtKlines
+     */
+    /*
+    TODO 需要更新接口: 综合指数交易对信息
+       GET /fapi/v1/indexInfo 获取交易对为综合指数的基础成分信息
+     */
+    /*
+    TODO 需要更新接口: 多资产模式资产汇率指数
+       GET /fapi/v1/assetIndex
+     */
 }
